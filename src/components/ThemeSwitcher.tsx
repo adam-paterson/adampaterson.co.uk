@@ -31,7 +31,7 @@ const ThemeSwitcher: React.FC = () => {
 
   return (
     <div className="flex items-center">
-      <FiSun className="text-yellow-400 mr-2" size={16} />
+      <FiSun className="text-yellow-600 mr-2" size={16} />
       <button
         onClick={toggleTheme}
         className="relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

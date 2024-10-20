@@ -5,8 +5,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "off-white": "#f7f7f7",
+        "off-white": "#f5f5f5",
         "dark-bg": "#1a202c",
+        "not-quite-black": "#444444",
+        highlight: "#E63946",
+        "dark-highlight": "#D62839",
       },
       fontFamily: {
         sans: ['"Monaspace Xenon"', "monospace"],
