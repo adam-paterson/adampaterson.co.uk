@@ -1,6 +1,6 @@
 ---
-import Navbar from '../components/Navbar';
 import ThemeSwitcher from '../components/ThemeSwitcher';
+import Footer from '../components/Footer';
 
 export interface Props {
 	title: string;
@@ -14,9 +14,10 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-			<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Monaspace+Argon:wght@400;700&display=swap" rel="stylesheet">
 		<script is:inline>
 			if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
 				document.documentElement.classList.add('dark');
@@ -25,11 +26,12 @@ const { title } = Astro.props;
 			}
 		</script>
 	</head>
-	<body class="bg-off-white dark:bg-dark-bg text-gray-900 dark:text-gray-100">
+	<body class="bg-off-white dark:bg-dark-bg text-gray-900 dark:text-gray-100 font-body">
 		<div class="fixed top-4 right-4">
 			<ThemeSwitcher client:load />
 		</div>
 		<slot />
+		<Footer />
 	</body>
 </html>
 
@@ -39,10 +41,12 @@ const { title } = Astro.props;
 		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
 	}
 	html {
-		font-family: system-ui, sans-serif;
+		font-family: 'Monaspace Argon', monospace;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Inter', sans-serif;
 	}
 	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
+		font-family: 'Monaspace Argon', monospace;
 	}
 </style>

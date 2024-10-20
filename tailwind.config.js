@@ -8,6 +8,11 @@ module.exports = {
         "off-white": "#f7f7f7",
         "dark-bg": "#1a202c",
       },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        mono: ['"Monaspace Argon"', "monospace"],
+        body: ['"Monaspace Argon"', "monospace"],
+      },
       animation: {
         blink: "blink 0.7s infinite",
       },
