@@ -1,5 +1,6 @@
 ---
 import ThemeSwitcher from '../components/ThemeSwitcher';
+import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
 
@@ -32,7 +33,9 @@ const { title } = Astro.props;
 		<div class="fixed top-4 right-4 z-50">
 			<ThemeSwitcher client:load />
 		</div>
-		<slot />
+		<div class="pt-16">
+			<slot />
+		</div>
 		<Footer />
 	</body>
 </html>

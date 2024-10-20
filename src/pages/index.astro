@@ -1,11 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import AnimatedRoles from '../components/AnimatedRoles';
-import TechStack from '../components/TechStack';
 
 const roles = [
   "am a Software Engineer",
-  "am also a Technical Architect",
+  "am a Technical Architect",
   "specialize in E-commerce",
   "am obsessed with AI",
   "am a problem solver",
@@ -17,7 +16,7 @@ const { title } = Astro.props;
 ---
 
 <Layout title={title}>
-  <main class="min-h-screen flex flex-col items-center justify-start pt-20 px-4">
+  <main class="min-h-screen flex flex-col items-center justify-start pt-8 px-4">
     <div class="text-center mb-12 max-w-4xl">
       <h2 class="text-4xl sm:text-6xl md:text-7xl font-black lg:text-8xl text-not-quite-black dark:text-white mb-4 font-handwriting tracking-tight">
         Hey, I'm Adam
@@ -25,30 +24,10 @@ const { title } = Astro.props;
       <p class="text-xl my-14 font-semibold sm:text-2xl md:text-3xl text-not-quite-black dark:text-gray-300 font-display">
         I <AnimatedRoles client:load roles={roles} typingSpeed={150} pauseDuration={8000} />
       </p>
-    </div>
-
-    <div class="w-full max-w-6xl mx-auto flex flex-col md:flex-row gap-8 mt-8">
-      <div class="md:w-1/2 font-body">
-        <h3 class="text-2xl font-bold mb-4 text-not-quite-black dark:text-white">About Me</h3>
-        <p class="mb-4">
-          I'm a Technical Solutions Architect with over 14 years of experience in developing custom e-commerce platforms and solving complex business challenges through innovative technology.
-        </p>
-        <p class="mb-4">
-          I specialize in Adobe Commerce, BigCommerce, and Shopify, and I'm deeply passionate about exploring the potential of AI and machine learning to drive digital transformation.
-        </p>
-      </div>
-      <div class="md:w-1/2 flex items-center justify-center">
-        <div class="w-full h-full bg-off-white dark:bg-gray-700 rounded-lg overflow-hidden">
-          <img 
-            src="/path-to-your-image.jpg" 
-            alt="Adam Paterson" 
-            class="w-full h-full object-cover"
-          />
-        </div>
+      <div class="flex justify-center">
+        <img src="/avatar.jpeg" alt="Adam" class="w-32 h-32 rounded-full" />
       </div>
     </div>
-
-    <TechStack client:load />
   </main>
 </Layout>
 
@@ -62,5 +41,40 @@ const { title } = Astro.props;
   @keyframes blink {
     0%, 100% { opacity: 0; }
     50% { opacity: 1; }
+  }
+
+  .career-timeline-container {
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
+  }
+
+  .career-timeline-container::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .career-timeline-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .career-timeline-container::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.7);
+    border-radius: 3px;
+    border: transparent;
+  }
+
+  .career-timeline-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(245,245,245,0), rgba(245,245,245,1));
+    pointer-events: none;
+  }
+
+  .dark .career-timeline-container::after {
+    background: linear-gradient(to bottom, rgba(26,32,44,0), rgba(26,32,44,1));
   }
 </style>
