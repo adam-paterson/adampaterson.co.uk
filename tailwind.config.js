@@ -9,9 +9,11 @@ module.exports = {
         "dark-bg": "#1a202c",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ['"Monaspace Xenon"', "monospace"],
         mono: ['"Monaspace Argon"', "monospace"],
-        body: ['"Monaspace Argon"', "monospace"],
+        body: ['"Monaspace Neon"', "monospace"],
+        display: ['"Monaspace Krypton"', "monospace"],
+        handwriting: ['"Monaspace Radon"', "monospace"],
       },
       animation: {
         blink: "blink 0.7s infinite",

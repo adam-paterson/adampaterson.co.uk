@@ -1,28 +1,42 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import AnimatedRoles from '../components/AnimatedRoles';
-import SocialLinks from '../components/SocialLinks';
 
 const roles = [
   "Software Engineer",
-  "Human Dad",
-  "Husband",
+  "Technical Architect",
+  "E-commerce Specialist",
   "AI Enthusiast",
   "Problem Solver",
-  "Lifelong Learner",
-  "Teacher"
+  "Innovator"
 ];
+
+const { title } = Astro.props;
 ---
 
-<Layout title="Adam's Portfolio">
+<Layout title={title}>
   <main class="min-h-screen flex flex-col items-center justify-center p-4 text-center">
-    <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white mb-4 font-sans">
-      Hello, I'm Adam
-    </h1>
+    <h2 class="text-6xl md:text-8xl lg:text-9xl text-gray-900 dark:text-white mb-4 font-handwriting" style="letter-spacing: -0.10em;">
+      Hey, I'm Adam
+    </h2>
     <p class="text-2xl md:text-3xl lg:text-4xl text-gray-700 dark:text-gray-300 font-mono mb-8">
       I'm a <AnimatedRoles client:load roles={roles} typingSpeed={150} pauseDuration={8000} />
     </p>
-    
+
+    <div id="introduction" class="mt-8 max-w-2xl mx-auto text-left 	p-6 rounded-lg font-body">
+      <p class="mb-4">
+        I'm a Technical Solutions Architect with over 14 years of experience in developing custom e-commerce platforms and solving complex business challenges through innovative technology.
+      </p>
+      <p class="mb-4">
+        I specialize in Adobe Commerce, BigCommerce, and Shopify, and I'm deeply passionate about exploring the potential of AI and machine learning to drive digital transformation.
+      </p>
+      <p class="mb-4">
+        Whether it's creating scalable e-commerce solutions or leveraging the latest in AI to streamline business processes, I'm always focused on delivering measurable results for my clients.
+      </p>
+      <p>
+        Explore my portfolio to see how I combine cutting-edge technologies with practical business insights, or get in touch to discuss how I can help bring your next project to life.
+      </p>
+    </div>
   </main>
 </Layout>
 

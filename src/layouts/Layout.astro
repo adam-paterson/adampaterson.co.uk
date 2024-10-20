@@ -1,6 +1,7 @@
 ---
 import ThemeSwitcher from '../components/ThemeSwitcher';
 import Footer from '../components/Footer';
+import GoogleTagManager from '../components/GoogleTagManager.astro';
 
 export interface Props {
 	title: string;
@@ -17,7 +18,7 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Monaspace+Argon:wght@400;700&display=swap" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/@fontsource/monaspace@1.0.0/index.css" rel="stylesheet">
 		<script is:inline>
 			if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
 				document.documentElement.classList.add('dark');
@@ -25,6 +26,7 @@ const { title } = Astro.props;
 				document.documentElement.classList.remove('dark');
 			}
 		</script>
+		<GoogleTagManager />
 	</head>
 	<body class="bg-off-white dark:bg-dark-bg text-gray-900 dark:text-gray-100 font-body">
 		<div class="fixed top-4 right-4">
@@ -41,12 +43,18 @@ const { title } = Astro.props;
 		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
 	}
 	html {
-		font-family: 'Monaspace Argon', monospace;
+		font-family: 'Monaspace Neon', monospace;
+		font-feature-settings: "calt" 1, "dlig" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1, "ss06" 1, "ss07" 1, "ss08" 1;
+		-webkit-font-feature-settings: "calt" 1, "dlig" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1, "ss06" 1, "ss07" 1, "ss08" 1;
 	}
 	h1, h2, h3, h4, h5, h6 {
-		font-family: 'Inter', sans-serif;
+		font-family: 'Monaspace Xenon', monospace;
+		font-feature-settings: "calt" 1, "dlig" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1, "ss06" 1, "ss07" 1, "ss08" 1;
+		-webkit-font-feature-settings: "calt" 1, "dlig" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1, "ss06" 1, "ss07" 1, "ss08" 1;
 	}
 	code {
 		font-family: 'Monaspace Argon', monospace;
+		font-feature-settings: "calt" 1, "dlig" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1, "ss06" 1, "ss07" 1, "ss08" 1;
+		-webkit-font-feature-settings: "calt" 1, "dlig" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1, "ss06" 1, "ss07" 1, "ss08" 1;
 	}
 </style>
