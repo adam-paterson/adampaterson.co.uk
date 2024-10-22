@@ -5,9 +5,11 @@ import react from "@astrojs/react";
 
 import tailwind from "@astrojs/tailwind";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.adampaterson.co.uk",
   base: "/",
-  integrations: [react(), tailwind()],
+  integrations: [react(), tailwind(), sitemap()],
 });
