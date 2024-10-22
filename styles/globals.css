@@ -3,3 +3,31 @@
 @tailwind utilities;
 
 /* Custom styles */
+@media (max-width: 640px) {
+  .font-handwriting {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    line-height: 1.1;
+  }
+
+  .animated-role {
+    min-width: 150px !important;
+  }
+}
+
+/* Add smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Improve dark mode transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+/* Particle effects optimization */
+@media (prefers-reduced-motion: reduce) {
+  .particle {
+    animation: none !important;
+  }
+}
