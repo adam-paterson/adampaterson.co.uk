@@ -3,21 +3,19 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero';
 import CareerTimeline from '../components/CareerTimeline';
 import AnimatedSection from '../components/AnimatedSection';
+import TechStack from '../components/TechStack';
 
 const roles = [
-  "am a Software Engineer",
-  "am a Technical Architect",
-  "specialize in E-commerce",
-  "am obsessed with AI",
-  "am a problem solver",
-  "am a dog dad",
-  "am also a human dad"
+  "build e-commerce solutions",
+  "am a Technical Solution Engineer",
+  "specialize in digital commerce",
+  "explore AI technologies",
+  "solve complex problems",
+  "architect scalable systems"
 ];
 
-const pageTitle = "Adam Paterson - Technical Architect & Software Engineer";
-const pageDescription = "Technical Architect and Software Engineer with over a decade of experience in e-commerce solutions, specializing in Adobe Commerce and modern web technologies.";
-
-const { title } = Astro.props;
+const pageTitle = "Adam Paterson - Technical Solution Engineer";
+const pageDescription = "Technical Solution Engineer with 14 years of e-commerce expertise, exploring the intersection of AI and digital commerce.";
 ---
 
 <Layout 
@@ -27,65 +25,99 @@ const { title } = Astro.props;
   <main class="flex flex-col min-h-screen">
     <Hero client:load roles={roles} />
 
-    {/* About Section with interactive cards */}
-    <section id="about" class="relative py-20 bg-gray-50 dark:bg-gray-900">
+    {/* Services Section */}
+    <section id="services" class="relative py-32">
+      <AnimatedSection client:load className="max-w-5xl mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-16 gradient-text">What I Do</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* E-commerce Expertise */}
+          <div class="card p-8">
+            <div class="mb-6 text-neutral-600 dark:text-neutral-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+            </div>
+            <h3 class="text-xl mb-3 gradient-text">E-commerce Solutions</h3>
+            <p class="text-neutral-600 dark:text-neutral-400">Expert in architecting and implementing scalable e-commerce solutions across multiple platforms including Shopify, Adobe Commerce, and Shopware.</p>
+          </div>
+
+          {/* Technical Architecture */}
+          <div class="card p-8">
+            <div class="mb-6 text-neutral-600 dark:text-neutral-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+            <h3 class="text-xl mb-3 gradient-text">Technical Architecture</h3>
+            <p class="text-neutral-600 dark:text-neutral-400">Designing robust, scalable systems that prioritize performance, security, and maintainability for enterprise e-commerce solutions.</p>
+          </div>
+
+          {/* AI Integration */}
+          <div class="card p-8">
+            <div class="mb-6 text-neutral-600 dark:text-neutral-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </div>
+            <h3 class="text-xl mb-3 gradient-text">AI Exploration</h3>
+            <p class="text-neutral-600 dark:text-neutral-400">Exploring the integration of AI technologies with e-commerce platforms to enhance customer experiences and optimize operations.</p>
+          </div>
+        </div>
+        <TechStack client:load />
+      </AnimatedSection>
+    </section>
+
+    {/* About Section */}
+    <section id="about" class="relative py-32">
       <AnimatedSection client:load className="max-w-3xl mx-auto px-4">
-        <h2 class="text-3xl font-display mb-8 text-center">About Me</h2>
-        <p class="text-lg leading-relaxed mb-8">
-          I'm a Software Engineer and Technical Architect with a passion for building scalable e-commerce solutions and exploring AI technologies. With over a decade of experience, I help businesses transform their digital presence.
+        <h2 class="text-3xl font-bold mb-12 gradient-text">About Me</h2>
+        <p class="text-lg leading-relaxed mb-16 text-neutral-600 dark:text-neutral-400">
+          I'm a Technical Solution Engineer with 14 years of experience in e-commerce development. My expertise spans across multiple platforms including Shopify, Adobe Commerce (Magento), Shopware, and emerging solutions like Medusa. Currently, I'm exploring the exciting intersection of AI and e-commerce, looking at how artificial intelligence can enhance digital commerce experiences and operations.
         </p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-          {/* Add your key skills/tech stack icons here */}
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+          <div class="text-center">
+            <div class="text-4xl font-bold gradient-text">14+</div>
+            <div class="text-sm mt-2 text-neutral-600 dark:text-neutral-400">Years Experience</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold gradient-text">100+</div>
+            <div class="text-sm mt-2 text-neutral-600 dark:text-neutral-400">Projects Delivered</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold gradient-text">6+</div>
+            <div class="text-sm mt-2 text-neutral-600 dark:text-neutral-400">E-commerce Platforms</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold gradient-text">20+</div>
+            <div class="text-sm mt-2 text-neutral-600 dark:text-neutral-400">Industries Served</div>
+          </div>
         </div>
       </AnimatedSection>
     </section>
 
-    {/* Featured Work with hover effects */}
-    <section class="py-20">
-      <AnimatedSection client:load delay={0.2} className="max-w-4xl mx-auto px-4">
-        <h2 class="text-3xl font-display mb-12 text-center">Featured Work</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-          {/* ProjectCards will go here */}
-        </div>
-        <div class="text-center mt-12">
-          <a href="/projects" class="text-highlight dark:text-dark-highlight hover:underline">
-            View All Projects →
-          </a>
-        </div>
-      </AnimatedSection>
-    </section>
-
-    {/* Experience Timeline - Professional journey */}
-    <section class="py-20 bg-off-white dark:bg-dark-bg">
-      <div class="max-w-4xl mx-auto px-4">
-        <h2 class="text-3xl font-display mb-12 text-center">Professional Journey</h2>
+    {/* Career Timeline */}
+    <section id="career" class="py-32">
+      <div class="max-w-5xl mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-16 gradient-text">Professional Journey</h2>
         <div class="relative">
           <CareerTimeline client:load />
         </div>
       </div>
     </section>
 
-    {/* Contact CTA - Clear call to action */}
-    <section class="py-20">
-      <div class="max-w-2xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-display mb-6">Let's Connect</h2>
-        <p class="mb-8 text-lg">
-          Open to discussing new opportunities, technical challenges, or just having a chat about technology.
-        </p>
-        <div class="space-x-4">
-          <a 
-            href="mailto:hello@adampaterson.co.uk" 
-            class="inline-block bg-highlight dark:bg-dark-highlight text-white px-8 py-3 rounded-lg hover:opacity-90 transition-opacity"
-          >
-            Get in Touch
-          </a>
-          <!-- <a 
-            href="/blog" 
-            class="inline-block border-2 border-highlight dark:border-dark-highlight text-highlight dark:text-dark-highlight px-8 py-3 rounded-lg hover:opacity-90 transition-opacity"
-          >
-            Read My Blog
-          </a> -->
-        </div>
+    {/* Call to Action */}
+    <section class="py-32">
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-6 gradient-text">Looking to Enhance Your E-commerce Platform?</h2>
+        <p class="text-lg mb-12 text-neutral-600 dark:text-neutral-400">Let's discuss how we can optimize your digital commerce experience with modern technologies.</p>
+        <a 
+          href="mailto:hello@adampaterson.co.uk"
+          class="inline-block px-8 py-3 rounded-lg border border-neutral-200 dark:border-neutral-800 
+                 text-neutral-800 dark:text-neutral-200 hover:border-neutral-300 dark:hover:border-neutral-700
+                 transition-all duration-300"
+        >
+          Get in Touch
+        </a>
       </div>
     </section>
   </main>
@@ -111,11 +143,7 @@ const { title } = Astro.props;
     @apply inline-block min-w-[200px];
   }
   .cursor {
-    @apply animate-blink;
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
+    @apply animate-pulse;
   }
 
   .career-timeline-container {

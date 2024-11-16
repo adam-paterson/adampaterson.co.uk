@@ -13,15 +13,16 @@ interface TimelineEntry {
 const timeline: TimelineEntry[] = [
   {
     date: "2022 - Present",
-    title: "Technical Solutions Architect / Principal Engineer",
+    title: "Technical Solutions Engineer",
     company: "IDHL",
     companyLogo: "/logos/weareidhl_logo.jpeg",
     description:
-      "Leading technical architecture for enterprise e-commerce solutions, specializing in Adobe Commerce and modern headless architectures.",
+      "Leading technical solutions for enterprise e-commerce clients, specializing in Adobe Commerce, Shopify, and modern headless architectures. Exploring AI integration opportunities for enhanced e-commerce experiences.",
     achievements: [
-      "Led the architectural design of multiple enterprise e-commerce platforms",
-      "Implemented CI/CD pipelines reducing deployment time by 60%",
-      "Mentored junior developers and established best practices",
+      "Architected and delivered enterprise-scale e-commerce solutions",
+      "Led technical discovery and solution design for major clients",
+      "Established modern development practices and CI/CD pipelines",
+      "Mentored development teams on best practices and emerging technologies"
     ],
   },
   {
@@ -30,8 +31,12 @@ const timeline: TimelineEntry[] = [
     company: "Absolute Design",
     companyLogo: "/logos/absolute_design_logo.jpeg",
     description:
-      "Led development teams, mentored developers, and architected scalable e-commerce solutions.",
-    achievements: ["Managed a team of 8 developers across multiple projects"],
+      "Led development of complex e-commerce solutions using Adobe Commerce and Shopify, focusing on performance optimization and scalability.",
+    achievements: [
+      "Delivered high-performance e-commerce solutions for enterprise clients",
+      "Implemented automated testing and deployment workflows",
+      "Optimized site performance and reduced server costs"
+    ],
   },
   {
     date: "2019 - 2021",
@@ -39,8 +44,12 @@ const timeline: TimelineEntry[] = [
     company: "Deploy (Attain Design)",
     companyLogo: "/logos/attain_design_logo.jpeg",
     description:
-      "Led development teams, mentored developers, and architected scalable e-commerce solutions.",
-    achievements: ["Managed a team of 8 developers across multiple projects"],
+      "Specialized in Adobe Commerce development and technical architecture, delivering robust e-commerce solutions for mid to large-size retailers.",
+    achievements: [
+      "Led technical architecture for major e-commerce projects",
+      "Implemented performance optimization strategies",
+      "Developed custom modules and integrations"
+    ],
   },
   {
     date: "2017 - 2019",
@@ -48,8 +57,12 @@ const timeline: TimelineEntry[] = [
     company: "sixbysix",
     companyLogo: "/logos/1631324242009.jpeg",
     description:
-      "Led development teams, mentored developers, and architected scalable e-commerce solutions.",
-    achievements: ["Managed a team of 8 developers across multiple projects"],
+      "Focused on building custom e-commerce solutions and integrations using Adobe Commerce and other platforms.",
+    achievements: [
+      "Developed complex multi-store implementations",
+      "Created custom ERP integrations",
+      "Improved development workflows and standards"
+    ],
   },
   {
     date: "2021 - 2023",
@@ -57,11 +70,11 @@ const timeline: TimelineEntry[] = [
     company: "Space 48",
     companyLogo: "/logos/space_48_logo.jpeg",
     description:
-      "Led development teams, mentored developers, and architected scalable e-commerce solutions.",
+      "Led development teams in building and maintaining large-scale e-commerce platforms, with a focus on Adobe Commerce and modern front-end technologies.",
     achievements: [
-      "Managed a team of 8 developers across multiple projects",
-      "Reduced server costs by 40% through optimization",
-      "Implemented new development standards",
+      "Managed development teams across multiple projects",
+      "Reduced server costs through infrastructure optimization",
+      "Implemented new development standards and practices"
     ],
   },
   {
@@ -70,7 +83,12 @@ const timeline: TimelineEntry[] = [
     company: "Meanbee",
     companyLogo: "/logos/meanbee.jpeg",
     description:
-      "Led development teams, mentored developers, and architected scalable e-commerce solutions.",
+      "Specialized in e-commerce development, building custom solutions and extensions for Adobe Commerce and other platforms.",
+    achievements: [
+      "Built custom e-commerce extensions and modules",
+      "Contributed to open-source e-commerce projects",
+      "Implemented automated testing practices"
+    ]
   },
   {
     date: "2014 - 2015",
@@ -78,7 +96,12 @@ const timeline: TimelineEntry[] = [
     company: "JH",
     companyLogo: "/logos/jh_logo.jpeg",
     description:
-      "Led development teams, mentored developers, and architected scalable e-commerce solutions.",
+      "Led development of e-commerce solutions using Adobe Commerce, focusing on custom implementations and integrations.",
+    achievements: [
+      "Managed development team and project delivery",
+      "Implemented coding standards and best practices",
+      "Delivered complex e-commerce solutions"
+    ]
   },
 ];
 
@@ -95,7 +118,7 @@ const CareerTimeline: React.FC = () => {
   return (
     <div className="relative">
       {/* Timeline Line - centered on mobile */}
-      <div className="absolute left-1/2 md:left-1/2 h-full w-px bg-gradient-to-b from-highlight/50 via-highlight to-highlight/50 dark:from-dark-highlight/50 dark:via-dark-highlight dark:to-dark-highlight/50 transform -translate-x-1/2" />
+      <div className="absolute left-1/2 md:left-1/2 h-full w-px bg-gradient-to-b from-neutral-400/50 via-neutral-600 to-neutral-400/50 dark:from-neutral-500/50 dark:via-neutral-400 dark:to-neutral-500/50 transform -translate-x-1/2" />
 
       {/* Timeline Entries */}
       <AnimatePresence mode="wait">
@@ -112,9 +135,9 @@ const CareerTimeline: React.FC = () => {
             } mb-12 md:mb-24 timeline-entry`}
           >
             {/* Date bubble with pulse effect - centered on mobile */}
-            <div className="absolute left-1/2 md:left-1/2 w-8 h-8 bg-highlight dark:bg-dark-highlight rounded-full transform -translate-x-1/2 flex items-center justify-center">
-              <div className="w-4 h-4 bg-off-white dark:bg-dark-bg rounded-full" />
-              <div className="absolute w-12 h-12 bg-highlight dark:bg-dark-highlight rounded-full opacity-20 animate-ping" />
+            <div className="absolute left-1/2 md:left-1/2 w-8 h-8 bg-neutral-800 dark:bg-neutral-400 rounded-full transform -translate-x-1/2 flex items-center justify-center">
+              <div className="w-4 h-4 bg-white dark:bg-neutral-900 rounded-full" />
+              <div className="absolute w-12 h-12 bg-neutral-800 dark:bg-neutral-400 rounded-full opacity-20 animate-ping" />
             </div>
 
             {/* Content - centered on mobile */}
@@ -124,14 +147,18 @@ const CareerTimeline: React.FC = () => {
               } pl-0 md:pl-0 ml-auto mr-auto md:ml-0 md:mr-0 max-w-[calc(100%-3rem)] md:max-w-none`}
             >
               <motion.div
+                className="bg-white dark:bg-neutral-800/50 p-6 rounded-xl shadow-lg hover:shadow-xl 
+                           transition-all duration-300 relative overflow-hidden group backdrop-blur-sm
+                           border border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600"
                 whileHover={{ scale: 1.02 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
                 onClick={() =>
                   setExpandedCard(expandedCard === index ? null : index)
                 }
               >
-                {/* Company Logo */}
-                <div className="absolute top-4 right-4 w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                {/* Company Logo with improved styling */}
+                <div className="absolute top-4 right-4 w-16 h-16 bg-neutral-50 dark:bg-neutral-700/50 
+                                rounded-xl flex items-center justify-center transform group-hover:scale-110 
+                                transition-transform duration-300 backdrop-blur-sm border border-neutral-200 dark:border-neutral-600">
                   <img
                     src={entry.companyLogo}
                     alt={`${entry.company} logo`}
@@ -139,21 +166,23 @@ const CareerTimeline: React.FC = () => {
                   />
                 </div>
 
-                {/* Date Badge */}
-                <span className="inline-block text-sm text-white dark:text-white font-mono bg-highlight dark:bg-dark-highlight px-3 py-1 rounded-full mb-3">
+                {/* Date Badge with gradient */}
+                <span className="inline-block text-sm text-white font-mono bg-gradient-to-r 
+                                 from-neutral-800 to-neutral-600 dark:from-neutral-600 dark:to-neutral-700 
+                                 px-3 py-1 rounded-full mb-3">
                   {entry.date}
                 </span>
 
                 {/* Title and Company */}
-                <h3 className="text-xl font-display mt-2 mb-1 pr-20">
+                <h3 className="text-xl font-bold mt-2 mb-1 pr-20">
                   {entry.title}
                 </h3>
-                <h4 className="text-lg text-gray-600 dark:text-gray-400 mb-3">
+                <h4 className="text-lg text-slate-600 dark:text-slate-400 mb-3">
                   {entry.company}
                 </h4>
 
                 {/* Description */}
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                <p className="text-slate-700 dark:text-slate-300 mb-4">
                   {entry.description}
                 </p>
 
@@ -167,14 +196,14 @@ const CareerTimeline: React.FC = () => {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <h5 className="font-display text-lg mb-2 text-highlight dark:text-dark-highlight">
+                      <h5 className="font-bold text-lg mb-2 text-neutral-800 dark:text-neutral-400">
                         Key Achievements
                       </h5>
                       <ul className="list-disc list-inside mb-4 space-y-2">
                         {entry.achievements.map((achievement, i) => (
                           <li
                             key={i}
-                            className="text-gray-700 dark:text-gray-300"
+                            className="text-slate-700 dark:text-slate-300"
                           >
                             {achievement}
                           </li>
@@ -187,7 +216,7 @@ const CareerTimeline: React.FC = () => {
                 {/* Expand/Collapse Indicator */}
                 {entry.achievements && (
                   <motion.div
-                    className="absolute bottom-4 right-4 text-highlight dark:text-dark-highlight"
+                    className="absolute bottom-4 right-4 text-neutral-600 dark:text-neutral-400"
                     animate={{ rotate: expandedCard === index ? 180 : 0 }}
                   >
                     ↓
@@ -208,7 +237,7 @@ const CareerTimeline: React.FC = () => {
           >
             <motion.button
               onClick={() => setShowAllEntries(true)}
-              className="group relative inline-flex items-center gap-2 bg-highlight dark:bg-dark-highlight text-white px-8 py-3 rounded-lg hover:opacity-90 transition-all duration-300 hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
+              className="group relative inline-flex items-center gap-2 bg-neutral-900 dark:bg-neutral-700 text-white px-8 py-3 rounded-lg hover:opacity-90 transition-all duration-300 hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

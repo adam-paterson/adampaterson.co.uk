@@ -1,210 +1,157 @@
 import React, { useState } from "react";
-import {
-  FaReact,
-  FaPhp,
-  FaJs,
-  FaPython,
-  FaAws,
-  FaDocker,
-  FaShopify,
-  FaMagento,
-  FaWordpress,
-  FaCode,
-  FaShoppingBag,
-  FaBook,
-  FaBrain,
-} from "react-icons/fa";
-import {
-  SiTypescript,
-  SiMysql,
-  SiMongodb,
-  SiRedis,
-  SiElasticsearch,
-  SiTailwindcss,
-  SiBigcommerce,
-  SiTensorflow,
-  SiPytorch,
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  SiReact, SiVuedotjs, SiPhp, SiPython, SiAmazon, 
+  SiGooglecloud, SiDocker, SiKubernetes, SiShopify,
+  SiMagento, SiLaravel, SiSymfony, SiJavascript,
+  SiTypescript, SiTailwindcss, SiNextdotjs, SiNodedotjs,
+  SiMysql, SiPostgresql, SiMongodb, SiRedis,
+  SiPytorch, SiTensorflow, SiOpenai
 } from "react-icons/si";
+import Particles from "./Stars";
 
-interface Skill {
+interface TechItem {
   name: string;
   icon: React.ElementType;
-  category: string;
-  domain: string;
+  x: number;  // Percentage position
+  y: number;  // Percentage position
 }
 
-const skills: Skill[] = [
-  { name: "React", icon: FaReact, category: "Frontend", domain: "Technology" },
-  {
-    name: "TypeScript",
-    icon: SiTypescript,
-    category: "Language",
-    domain: "Technology",
-  },
-  { name: "PHP", icon: FaPhp, category: "Language", domain: "Technology" },
-  {
-    name: "JavaScript",
-    icon: FaJs,
-    category: "Language",
-    domain: "Technology",
-  },
-  {
-    name: "Python",
-    icon: FaPython,
-    category: "Language",
-    domain: "Technology",
-  },
-  { name: "AWS", icon: FaAws, category: "Cloud", domain: "Technology" },
-  { name: "Docker", icon: FaDocker, category: "DevOps", domain: "Technology" },
-  { name: "MySQL", icon: SiMysql, category: "Database", domain: "Technology" },
-  {
-    name: "MongoDB",
-    icon: SiMongodb,
-    category: "Database",
-    domain: "Technology",
-  },
-  { name: "Redis", icon: SiRedis, category: "Database", domain: "Technology" },
-  {
-    name: "Elasticsearch",
-    icon: SiElasticsearch,
-    category: "Search",
-    domain: "Technology",
-  },
-  {
-    name: "Tailwind CSS",
-    icon: SiTailwindcss,
-    category: "Frontend",
-    domain: "Technology",
-  },
-  {
-    name: "Shopify",
-    icon: FaShopify,
-    category: "Platform",
-    domain: "E-commerce",
-  },
-  {
-    name: "Magento",
-    icon: FaMagento,
-    category: "Platform",
-    domain: "E-commerce",
-  },
-  {
-    name: "BigCommerce",
-    icon: SiBigcommerce,
-    category: "Platform",
-    domain: "E-commerce",
-  },
-  {
-    name: "WordPress",
-    icon: FaWordpress,
-    category: "CMS",
-    domain: "Brochureware",
-  },
-  {
-    name: "TensorFlow",
-    icon: SiTensorflow,
-    category: "Framework",
-    domain: "AI/ML",
-  },
-  { name: "PyTorch", icon: SiPytorch, category: "Framework", domain: "AI/ML" },
-];
+interface Constellation {
+  name: string;
+  items: TechItem[];
+}
 
-const domains = [
-  { name: "Technology", icon: FaCode },
-  { name: "E-commerce", icon: FaShoppingBag },
-  { name: "Brochureware", icon: FaBook },
-  { name: "AI/ML", icon: FaBrain },
+const constellations: Constellation[] = [
+  {
+    name: "AI & ML",
+    items: [
+      { name: "Python", icon: SiPython, x: 20, y: 20 },
+      { name: "PyTorch", icon: SiPytorch, x: 25, y: 25 },
+      { name: "TensorFlow", icon: SiTensorflow, x: 15, y: 30 },
+      { name: "OpenAI", icon: SiOpenai, x: 30, y: 15 },
+    ]
+  },
+  {
+    name: "Frontend",
+    items: [
+      { name: "JavaScript", icon: SiJavascript, x: 60, y: 15 },
+      { name: "TypeScript", icon: SiTypescript, x: 65, y: 20 },
+      { name: "React", icon: SiReact, x: 70, y: 25 },
+      { name: "Vue.js", icon: SiVuedotjs, x: 55, y: 30 },
+      { name: "Next.js", icon: SiNextdotjs, x: 75, y: 15 },
+      { name: "TailwindCSS", icon: SiTailwindcss, x: 50, y: 25 },
+    ]
+  },
+  {
+    name: "Backend",
+    items: [
+      { name: "PHP", icon: SiPhp, x: 20, y: 60 },
+      { name: "Node.js", icon: SiNodedotjs, x: 25, y: 65 },
+      { name: "Laravel", icon: SiLaravel, x: 15, y: 70 },
+      { name: "Symfony", icon: SiSymfony, x: 30, y: 75 },
+    ]
+  },
+  {
+    name: "Infrastructure",
+    items: [
+      { name: "AWS", icon: SiAmazon, x: 70, y: 60 },
+      { name: "Docker", icon: SiDocker, x: 75, y: 65 },
+      { name: "Kubernetes", icon: SiKubernetes, x: 65, y: 70 },
+      { name: "Redis", icon: SiRedis, x: 80, y: 75 },
+    ]
+  }
 ];
-
-const categories = Array.from(new Set(skills.map((skill) => skill.category)));
 
 const TechStack: React.FC = () => {
-  const [activeDomain, setActiveDomain] = useState("Technology");
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [hoveredConstellation, setHoveredConstellation] = useState<string | null>(null);
 
   return (
-    <div className="my-12 w-50 bg-off-white dark:bg-gray-800 rounded-lg p-6">
-      <h3 className="text-3xl text-center tracking-tight font-bold font-handwriting mb-6 text-not-quite-black dark:text-white">
-        Skills & Tech Stack
-      </h3>
-
-      {/* Domain Buttons */}
-      <div className="flex flex-wrap justify-center mb-8">
-        {domains.map((domain) => (
-          <button
-            key={domain.name}
-            onClick={() => {
-              setActiveDomain(domain.name);
-              setActiveCategory("All");
+    <div className="relative h-[800px] w-full my-16 rounded-xl overflow-hidden">
+      {/* Background particles */}
+      <Particles className="absolute inset-0 -z-10" />
+      
+      {/* Constellations */}
+      {constellations.map((constellation) => (
+        <div
+          key={constellation.name}
+          onMouseEnter={() => setHoveredConstellation(constellation.name)}
+          onMouseLeave={() => setHoveredConstellation(null)}
+        >
+          {/* Constellation name */}
+          <motion.div
+            className="absolute text-sm font-mono text-neutral-600 dark:text-neutral-400"
+            style={{
+              left: `${constellation.items[0].x}%`,
+              top: `${constellation.items[0].y - 8}%`,
             }}
-            className={`flex flex-col items-center p-4 m-2 rounded-lg transition-all duration-300 w-32
-              ${
-                activeDomain === domain.name
-                  ? "bg-highlight dark:bg-dark-highlight text-white shadow-md transform scale-105"
-                  : "bg-gray-200 opacity-45 text-not-quite-black dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
-              }`}
+            animate={{
+              opacity: hoveredConstellation === constellation.name ? 1 : 0.5,
+            }}
           >
-            <domain.icon className="text-4xl mb-2" />
-            <span className="text-xs font-handwriting font-semibold">
-              {domain.name}
-            </span>
-          </button>
-        ))}
-      </div>
+            {constellation.name}
+          </motion.div>
 
-      {/* Category Filter */}
-      <div className="mb-8">
-        <label
-          htmlFor="category-select"
-          className="block text-sm font-medium text-not-quite-black dark:text-gray-300 mb-2"
-        >
-          Filter by Category:
-        </label>
-        <select
-          id="category-select"
-          onChange={(e) => setActiveCategory(e.target.value)}
-          value={activeCategory}
-          className="w-full md:w-64 bg-white dark:bg-gray-700 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="All">All Categories</option>
-          {categories
-            .filter((category) =>
-              skills.some(
-                (skill) =>
-                  skill.domain === activeDomain && skill.category === category
-              )
-            )
-            .map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
+          {/* Constellation lines */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none">
+            {constellation.items.slice(0, -1).map((item, index) => (
+              <motion.line
+                key={index}
+                x1={`${item.x}%`}
+                y1={`${item.y}%`}
+                x2={`${constellation.items[index + 1].x}%`}
+                y2={`${constellation.items[index + 1].y}%`}
+                stroke={hoveredConstellation === constellation.name 
+                  ? "rgba(115, 115, 115, 0.5)" 
+                  : "rgba(115, 115, 115, 0.2)"}
+                strokeWidth="1"
+                strokeDasharray="4 4"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+              />
             ))}
-        </select>
-      </div>
+          </svg>
 
-      {/* Skills Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {skills
-          .filter(
-            (skill) =>
-              skill.domain === activeDomain &&
-              (activeCategory === "All" || skill.category === activeCategory)
-          )
-          .map((skill) => (
+          {/* Tech icons */}
+          {constellation.items.map((tech) => (
             <div
-              key={skill.name}
-              className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+              key={tech.name}
+              className="absolute"
+              style={{
+                left: `${tech.x}%`,
+                top: `${tech.y}%`,
+                transform: 'translate(-50%, -50%)',
+              }}
             >
-              <skill.icon className="text-4xl mb-2 text-highlight dark:text-dark-highlight" />
-              <span className="text-sm text-center text-not-quite-black dark:text-gray-300 font-medium">
-                {skill.name}
-              </span>
-              <span className="text-xs text-center text-gray-500 dark:text-gray-400 mt-1">
-                {skill.category}
-              </span>
+              <motion.div 
+                className="group relative flex items-center justify-center"
+                whileHover={{ scale: 1.2 }}
+                style={{ transformOrigin: 'center center' }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <tech.icon 
+                  className={`w-6 h-6 md:w-8 md:h-8 transition-all duration-300
+                    ${hoveredConstellation === constellation.name 
+                      ? 'text-neutral-800 dark:text-neutral-200' 
+                      : 'text-neutral-600 dark:text-neutral-400'}`}
+                />
+                <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 
+                               transition-opacity duration-200 text-xs text-neutral-600 dark:text-neutral-400 
+                               whitespace-nowrap pointer-events-none">
+                  {tech.name}
+                </span>
+                <motion.div 
+                  className={`absolute inset-0 bg-neutral-500/5 dark:bg-neutral-300/5 rounded-full blur-sm 
+                             transition-opacity duration-300
+                             ${hoveredConstellation === constellation.name ? 'opacity-100' : 'opacity-0'}`}
+                  layoutId={`glow-${tech.name}`}
+                />
+              </motion.div>
             </div>
           ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };

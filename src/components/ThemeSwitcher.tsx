@@ -31,22 +31,20 @@ const ThemeSwitcher: React.FC = () => {
 
   return (
     <div className="flex items-center">
-      <FiSun className="text-yellow-600 mr-2" size={16} />
+      <FiSun className="text-amber-500 dark:text-slate-400 mr-2" size={18} />
       <button
         onClick={toggleTheme}
-        className="relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        style={{
-          backgroundColor: isDark ? "#4B5563" : "#D1D5DB",
-        }}
+        className="relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 bg-slate-200 dark:bg-slate-700"
+        aria-label="Toggle theme"
       >
         <span className="sr-only">Toggle theme</span>
         <span
           className={`${
             isDark ? "translate-x-6" : "translate-x-1"
-          } inline-block w-4 h-4 transform bg-white rounded-full transition-transform`}
+          } inline-block w-4 h-4 transform bg-white rounded-full transition-transform shadow-sm`}
         />
       </button>
-      <FiMoon className="text-gray-400 ml-2" size={16} />
+      <FiMoon className="text-slate-400 dark:text-slate-300 ml-2" size={18} />
     </div>
   );
 };

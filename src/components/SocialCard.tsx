@@ -16,7 +16,7 @@ const SocialCard = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#1a202c",
+          background: "linear-gradient(to bottom right, #1e1b4b, #4c1d95)",
           padding: "40px",
         }}
       >
@@ -25,36 +25,43 @@ const SocialCard = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            maxWidth: "700px",
           }}
         >
-          <img
-            src="avatar.jpeg"
-            alt="Adam Paterson"
-            style={{
-              width: "150px",
-              height: "150px",
-              borderRadius: "75px",
-              marginBottom: "20px",
-            }}
-          />
           <h1
             style={{
-              fontSize: "60px",
+              fontSize: "72px",
               fontWeight: "bold",
-              color: "#ffffff",
-              marginBottom: "10px",
+              background: "linear-gradient(to right, #e9d5ff, #a5b4fc)",
+              backgroundClip: "text",
+              color: "transparent",
+              marginBottom: "20px",
+              textAlign: "center",
             }}
           >
             Adam Paterson
           </h1>
           <p
             style={{
-              fontSize: "30px",
-              color: "#E63946",
+              fontSize: "32px",
+              color: "#e2e8f0",
               marginBottom: "20px",
+              textAlign: "center",
+              lineHeight: 1.4,
             }}
           >
             Technical Architect & Software Engineer
+          </p>
+          <p
+            style={{
+              fontSize: "24px",
+              color: "#94a3b8",
+              textAlign: "center",
+              maxWidth: "600px",
+              lineHeight: 1.6,
+            }}
+          >
+            Specializing in e-commerce solutions and AI technologies
           </p>
         </div>
       </div>

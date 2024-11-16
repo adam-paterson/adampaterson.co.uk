@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap');
+
+@layer base {
+  body {
+    @apply antialiased text-neutral-800 dark:text-neutral-200 font-jakarta;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sora font-medium tracking-tight;
+  }
+}
+
+@layer components {
+  .link-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-current 
+           after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .card {
+    @apply relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800
+           bg-white/30 dark:bg-neutral-800/30 backdrop-blur-sm
+           transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700
+           hover:shadow-lg hover:shadow-neutral-100 dark:hover:shadow-neutral-900/10
+           hover:-translate-y-1;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-neutral-800 to-neutral-600 dark:from-neutral-300 dark:to-neutral-400 
+           bg-clip-text text-transparent;
+  }
+}
+
 /* Custom styles */
 @media (max-width: 640px) {
   .font-handwriting {
@@ -20,9 +53,12 @@ html {
   overflow-x: hidden;
 }
 
-/* Improve dark mode transitions */
+/* Improve transitions */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Particle effects optimization */
@@ -30,4 +66,26 @@ html {
   .particle {
     animation: none !important;
   }
+}
+
+/* Custom selection color */
+::selection {
+  @apply bg-neutral-900/10 dark:bg-white/10;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-200 dark:bg-neutral-800 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-300 dark:bg-neutral-700;
 }
