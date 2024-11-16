@@ -8,7 +8,7 @@ import {
   SiMysql, SiPostgresql, SiMongodb, SiRedis,
   SiPytorch, SiTensorflow, SiOpenai
 } from "react-icons/si";
-import Particles from "./Stars";
+import Stars from "./Stars";
 
 interface TechItem {
   name: string;
@@ -68,8 +68,7 @@ const TechStack: React.FC = () => {
 
   return (
     <div className="relative h-[800px] w-full my-16 rounded-xl overflow-hidden">
-      {/* Background particles */}
-      <Particles className="absolute inset-0 -z-10" />
+      <Stars className="absolute inset-0 -z-10" parallax={false} />
       
       {/* Constellations */}
       {constellations.map((constellation) => (
@@ -107,8 +106,19 @@ const TechStack: React.FC = () => {
                 strokeWidth="1"
                 strokeDasharray="4 4"
                 initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
+                animate={{
+                  pathLength: 1,
+                  filter: hoveredConstellation === constellation.name 
+                    ? ["blur(0px)", "blur(2px)", "blur(0px)"] 
+                    : "blur(0px)",
+                }}
+                transition={{
+                  pathLength: { duration: 1.5, ease: "easeInOut" },
+                  filter: {
+                    duration: 2,
+                    repeat: Infinity,
+                  }
+                }}
               />
             ))}
           </svg>

@@ -4,6 +4,8 @@ import Hero from '../components/Hero';
 import CareerTimeline from '../components/CareerTimeline';
 import AnimatedSection from '../components/AnimatedSection';
 import TechStack from '../components/TechStack';
+import NebulaEffect from '../components/NebulaEffect';
+import OrbitalAccent from '../components/OrbitalAccent';
 
 const roles = [
   "build e-commerce solutions",
@@ -27,8 +29,12 @@ const pageDescription = "Technical Solution Engineer with 14 years of e-commerce
 
     {/* Services Section */}
     <section id="services" class="relative py-32">
+      <NebulaEffect client:load />
       <AnimatedSection client:load className="max-w-5xl mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-16 gradient-text">What I Do</h2>
+        <div class="relative">
+          <OrbitalAccent client:load />
+          <h2 class="text-3xl font-bold mb-16 gradient-text">What I Do</h2>
+        </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* E-commerce Expertise */}
           <div class="card p-8">
@@ -69,8 +75,12 @@ const pageDescription = "Technical Solution Engineer with 14 years of e-commerce
 
     {/* About Section */}
     <section id="about" class="relative py-32">
+      <NebulaEffect client:load />
       <AnimatedSection client:load className="max-w-3xl mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-12 gradient-text">About Me</h2>
+        <div class="relative">
+          <OrbitalAccent client:load />
+          <h2 class="text-3xl font-bold mb-12 gradient-text">About Me</h2>
+        </div>
         <p class="text-lg leading-relaxed mb-16 text-neutral-600 dark:text-neutral-400">
           I'm a Technical Solution Engineer with 14 years of experience in e-commerce development. My expertise spans across multiple platforms including Shopify, Adobe Commerce (Magento), Shopware, and emerging solutions like Medusa. Currently, I'm exploring the exciting intersection of AI and e-commerce, looking at how artificial intelligence can enhance digital commerce experiences and operations.
         </p>
@@ -96,9 +106,13 @@ const pageDescription = "Technical Solution Engineer with 14 years of e-commerce
     </section>
 
     {/* Career Timeline */}
-    <section id="career" class="py-32">
+    <section id="career" class="py-32 relative">
+      <NebulaEffect client:load />
       <div class="max-w-5xl mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-16 gradient-text">Professional Journey</h2>
+        <div class="relative">
+          <OrbitalAccent client:load />
+          <h2 class="text-3xl font-bold mb-16 gradient-text">Professional Journey</h2>
+        </div>
         <div class="relative">
           <CareerTimeline client:load />
         </div>
@@ -106,9 +120,13 @@ const pageDescription = "Technical Solution Engineer with 14 years of e-commerce
     </section>
 
     {/* Call to Action */}
-    <section class="py-32">
+    <section class="py-32 relative">
+      <NebulaEffect client:load />
       <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-6 gradient-text">Looking to Enhance Your E-commerce Platform?</h2>
+        <div class="relative">
+          <OrbitalAccent client:load />
+          <h2 class="text-3xl font-bold mb-6 gradient-text">Looking to Enhance Your E-commerce Platform?</h2>
+        </div>
         <p class="text-lg mb-12 text-neutral-600 dark:text-neutral-400">Let's discuss how we can optimize your digital commerce experience with modern technologies.</p>
         <a 
           href="mailto:hello@adampaterson.co.uk"

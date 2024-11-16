@@ -11,7 +11,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ roles }) => {
   return (
     <>
-    <Particles className="absolute w-100 inset-0 -z-10" />
+    <Particles className="absolute w-100 inset-0 -z-10" parallax={true} />
     <section className="relative min-h-[85vh] flex items-center">
       <motion.div
         initial={{ y: 20, opacity: 0 }}
