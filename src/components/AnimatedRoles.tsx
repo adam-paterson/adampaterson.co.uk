@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-interface AnimatedRolesProps {
-  roles: string[];
-}
+interface AnimatedRolesProps {}
 
-const AnimatedRoles: React.FC<AnimatedRolesProps> = ({ roles }) => {
+const AnimatedRoles: React.FC<AnimatedRolesProps> = () => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 

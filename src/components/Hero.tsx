@@ -2,13 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import AnimatedRoles from "./AnimatedRoles";
 import Particles from "./Stars";
-import ScrollIndicator from "./ScrollIndicator";
 
 interface HeroProps {
-  roles: string[];
+  roles?: string[];
 }
 
-const Hero: React.FC<HeroProps> = ({ roles }) => {
+const Hero: React.FC<HeroProps> = ({ roles = [] }) => {
   return (
     <>
     <Particles className="absolute w-100 inset-0 -z-10" parallax={true} />
@@ -23,7 +22,7 @@ const Hero: React.FC<HeroProps> = ({ roles }) => {
           Hi, I'm Adam
         </h1>
         <div className="mb-8 text-2xl sm:text-3xl md:text-4xl text-slate-700 dark:text-slate-300">
-          I <AnimatedRoles roles={roles} />
+          I <AnimatedRoles />
         </div>
         <p className="text-lg sm:text-xl max-w-2xl mb-12 text-slate-600 dark:text-slate-400 leading-relaxed">
           I'm a full stack developer with experience across web, mobile apps, and game development. Currently

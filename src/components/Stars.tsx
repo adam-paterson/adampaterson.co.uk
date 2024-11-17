@@ -27,7 +27,6 @@ const Stars: React.FC<ParticlesProps> = ({ className, parallax = false }) => {
         const size = Math.random() * (depth === 1 ? 2 : depth === 2 ? 3 : 4);
         const baseOpacity = depth === 1 ? 0.3 : depth === 2 ? 0.4 : 0.5;
         const animationDuration = depth === 1 ? "60s" : depth === 2 ? "45s" : "30s";
-        const twinkleSpeed = depth === 1 ? 4 : depth === 2 ? 3 : 2;
         const delay = Math.random() * 2;
         
         const x = Math.random() * 100;
