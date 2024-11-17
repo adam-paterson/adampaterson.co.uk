@@ -94,10 +94,7 @@ const TechStack: React.FC = () => {
       
       {/* Title centered */}
       <div className="text-center mb-16 relative z-10">
-        <h3 className="text-2xl font-bold gradient-text">Technology Constellations</h3>
-        <p className="text-neutral-600 dark:text-neutral-400 mt-4">
-          Navigate through my technical universe
-        </p>
+        <h3 className="text-2xl font-bold gradient-text">Technology</h3>
       </div>
 
       {/* Constellations container */}
