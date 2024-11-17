@@ -209,13 +209,38 @@ const allFields: FieldGroup = {
 </Layout>
 
 <script>
-  const FUNCTION_URL = 'YOUR_CLOUD_FUNCTION_URL';
+  const FUNCTION_URL = 'https://contact-form-606879949848.europe-west2.run.app';
 
+  // Add form field visibility toggling
+  document.querySelectorAll('input[name="contact_reason"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      // Hide all field groups
+      document.querySelectorAll('[id^="fields-"]').forEach(group => {
+        group.classList.add('hidden');
+      });
+
+      // Show selected field group
+      const selectedReason = (e.target as HTMLInputElement).value;
+      const fieldsToShow = document.getElementById(`fields-${selectedReason}`);
+      if (fieldsToShow) {
+        fieldsToShow.classList.remove('hidden');
+      }
+
+      // Update selected pill styling
+      document.querySelectorAll('.reason-pill').forEach(pill => {
+        pill.classList.remove('selected');
+      });
+      (e.target as HTMLElement).closest('.reason-pill')?.classList.add('selected');
+    });
+  });
+
+  // Form submission handler
   document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const form = e.target as HTMLFormElement;
     const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalButtonText = submitButton.textContent || 'Send Message';
     
     try {
       submitButton.disabled = true;
@@ -240,13 +265,13 @@ const allFields: FieldGroup = {
       form.reset();
       
       // Show success message
-      alert('Message sent successfully!');
+      alert('Message sent successfully! I will get back to you soon.');
     } catch (error) {
       console.error('Error sending message:', error);
-      alert('Failed to send message. Please try again.');
+      alert('Failed to send message. Please try again or email me directly at hello@adampaterson.co.uk');
     } finally {
       submitButton.disabled = false;
-      submitButton.textContent = 'Send Message';
+      submitButton.textContent = originalButtonText;
     }
   });
 </script>
