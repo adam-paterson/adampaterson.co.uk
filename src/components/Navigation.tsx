@@ -8,9 +8,8 @@ const Navigation: React.FC = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Projects", path: "/projects" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { name: "About", path: "/about-me" },
+    { name: "Contact", path: "/contact-me" },
   ];
 
   return (
@@ -33,7 +32,7 @@ const Navigation: React.FC = () => {
               <a
                 key={item.name}
                 href={item.path}
-                className="hidden nav-link"
+                className="nav-link"
               >
                 {item.name}
               </a>
@@ -45,7 +44,7 @@ const Navigation: React.FC = () => {
             <ThemeSwitcher />
 
             {/* Mobile Menu Button */}
-            <div className="hidden">
+            <div className="md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
