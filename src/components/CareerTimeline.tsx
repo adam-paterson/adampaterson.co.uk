@@ -138,7 +138,8 @@ const CareerTimeline: React.FC = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => navigate(-1)}
-          className="p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+          className="p-2 rounded-full bg-teal-500/10 backdrop-blur-sm border border-teal-500/20 
+                     text-teal-600 dark:text-teal-400"
           disabled={isAnimating}
         >
           <FiChevronLeft className="w-6 h-6" />
@@ -147,65 +148,13 @@ const CareerTimeline: React.FC = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => navigate(1)}
-          className="p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+          className="p-2 rounded-full bg-teal-500/10 backdrop-blur-sm border border-teal-500/20 
+                     text-teal-600 dark:text-teal-400"
           disabled={isAnimating}
         >
           <FiChevronRight className="w-6 h-6" />
         </motion.button>
       </div>
-
-      {/* Rocket */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`rocket-${currentIndex}-${direction}`}
-          className="absolute top-1/2 -translate-y-1/2 z-10 w-8 h-8"
-          initial={{ 
-            x: direction === 1 ? '-10%' : '110%',
-            opacity: 0
-          }}
-          animate={{ 
-            x: direction === 1 ? '110%' : '-10%',
-            opacity: [0, 1, 1, 0]
-          }}
-          exit={{ opacity: 0 }}
-          transition={{
-            x: { duration: 0.5, ease: "easeInOut" },
-            opacity: { duration: 0.5, times: [0, 0.1, 0.9, 1] }
-          }}
-        >
-          <motion.div
-            className="w-full h-full"
-            initial={{ rotate: direction === 1 ? 0 : 180 }}
-            animate={{ rotate: direction === 1 ? 0 : 180 }}
-          >
-            <svg 
-              viewBox="0 0 24 24" 
-              className="w-full h-full"
-              style={{
-                filter: "drop-shadow(0 0 10px rgba(255,255,255,0.3))"
-              }}
-            >
-              <path
-                fill="currentColor"
-                d="M13.13 22.19L11.5 18.36C13.07 17.78 14.54 17 15.9 16.09L13.13 22.19M5.64 12.5L1.81 10.87L7.91 8.1C7 9.46 6.22 10.93 5.64 12.5M19.22 4C19.5 4 19.75 4 19.96 4.05C20.13 5.44 19.94 8.3 16.66 11.58C14.96 13.29 12.93 14.6 10.65 15.47L8.5 13.37C9.42 11.06 10.73 9.03 12.42 7.34C15.18 4.58 17.64 4 19.22 4M19.22 2C17.24 2 14.24 2.69 11 5.93C8.81 8.12 7.5 10.53 6.65 12.64C6.37 13.39 6.56 14.21 7.11 14.77L9.24 16.89C9.62 17.27 10.13 17.5 10.66 17.5C10.89 17.5 11.13 17.44 11.36 17.35C13.5 16.53 15.88 15.19 18.07 13C23.73 7.34 21.61 2.39 21.61 2.39S20.7 2 19.22 2Z"
-              />
-              <motion.path
-                fill="#FF6B6B"
-                d="M4 12c0-1.1.9-2 2-2s2 .9 2 2s-.9 2-2 2s-2-.9-2-2z"
-                animate={{
-                  opacity: [0.4, 1, 0.4],
-                  scale: [0.8, 1, 0.8],
-                }}
-                transition={{
-                  duration: 0.3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-            </svg>
-          </motion.div>
-        </motion.div>
-      </AnimatePresence>
 
       {/* Timeline Cards */}
       <div className="relative pt-16 pb-8">
@@ -265,8 +214,8 @@ const CareerTimeline: React.FC = () => {
               key={index}
               className={`w-2 h-2 rounded-full cursor-pointer ${
                 index === currentIndex 
-                  ? 'bg-neutral-800 dark:bg-neutral-200' 
-                  : 'bg-neutral-300 dark:bg-neutral-700'
+                  ? 'bg-teal-600 dark:bg-teal-400' 
+                  : 'bg-teal-200 dark:bg-teal-800'
               }`}
               whileHover={{ scale: 1.2 }}
               onClick={() => setCurrentIndex(index)}

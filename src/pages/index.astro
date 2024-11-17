@@ -71,7 +71,7 @@ const pageDescription = "Technical Solution Engineer with 14 years of e-commerce
         </div>
       </AnimatedSection>
       
-      {/* Move TechStack outside AnimatedSection for full width */}
+      {/* Move TechStack outside AnimatedSection and remove width constraints */}
       <div class="w-full">
         <TechStack client:load />
       </div>
@@ -110,10 +110,11 @@ const pageDescription = "Technical Solution Engineer with 14 years of e-commerce
     </section>
 
     {/* Career Timeline */}
-    <section id="career" class="py-32 relative">
+    <section id="career" class="relative py-32">
       <NebulaEffect client:load />
-      <div class="max-w-5xl mx-auto px-4">
-        <div class="relative">
+      {/* Remove max-w-5xl constraint from the outer div */}
+      <div class="mx-auto">
+        <div class="relative max-w-5xl mx-auto px-4">
           <OrbitalAccent client:load />
           <h2 class="text-3xl font-bold mb-16 gradient-text">Professional Journey</h2>
         </div>
@@ -134,9 +135,9 @@ const pageDescription = "Technical Solution Engineer with 14 years of e-commerce
         <p class="text-lg mb-12 text-neutral-600 dark:text-neutral-400">Let's discuss how we can optimize your digital commerce experience with modern technologies.</p>
         <a 
           href="mailto:hello@adampaterson.co.uk"
-          class="inline-block px-8 py-3 rounded-lg border border-neutral-200 dark:border-neutral-800 
-                 text-neutral-800 dark:text-neutral-200 hover:border-neutral-300 dark:hover:border-neutral-700
-                 transition-all duration-300"
+          class="relative px-8 py-3 rounded-lg border-2 border-teal-600 dark:border-teal-400
+                 text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/10
+                 transition-colors duration-300"
         >
           Get in Touch
         </a>

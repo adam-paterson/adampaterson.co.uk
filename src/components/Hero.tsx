@@ -34,11 +34,11 @@ const Hero: React.FC<HeroProps> = ({ roles }) => {
             href="#services"
             whileHover={{ 
               y: -4,
-              boxShadow: "0 10px 20px -10px rgba(0,0,0,0.2)"
+              boxShadow: "0 10px 20px -10px rgba(13, 148, 136, 0.25)"
             }}
             whileTap={{ scale: 0.95 }}
-            className="relative px-8 py-3 rounded-lg bg-neutral-900 dark:bg-neutral-700 text-white 
-                     hover:bg-neutral-800 dark:hover:bg-neutral-600 transition-colors duration-300"
+            className="relative px-8 py-3 rounded-lg bg-teal-600 dark:bg-teal-500 text-white 
+                     hover:bg-teal-700 dark:hover:bg-teal-400 transition-colors duration-300"
           >
             <motion.span
               className="absolute inset-0 rounded-lg bg-white/10"
@@ -58,15 +58,15 @@ const Hero: React.FC<HeroProps> = ({ roles }) => {
             href="mailto:hello@adampaterson.co.uk"
             whileHover={{ 
               y: -4,
-              boxShadow: "0 10px 20px -10px rgba(0,0,0,0.1)"
+              boxShadow: "0 10px 20px -10px rgba(13, 148, 136, 0.15)"
             }}
             whileTap={{ scale: 0.95 }}
-            className="relative px-8 py-3 rounded-lg border-2 border-neutral-600 dark:border-neutral-400
-                     text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900/10
+            className="relative px-8 py-3 rounded-lg border-2 border-teal-600 dark:border-teal-400
+                     text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/10
                      transition-colors duration-300"
           >
             <motion.span
-              className="absolute inset-0 rounded-lg bg-neutral-600/10 dark:bg-neutral-400/10"
+              className="absolute inset-0 rounded-lg bg-teal-600/10 dark:bg-teal-400/10"
               animate={{
                 opacity: [0, 0.1, 0]
               }}
