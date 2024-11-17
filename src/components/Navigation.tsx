@@ -33,7 +33,7 @@ const Navigation: React.FC = () => {
               <a
                 key={item.name}
                 href={item.path}
-                className="nav-link"
+                className="hidden nav-link"
               >
                 {item.name}
               </a>
@@ -45,7 +45,7 @@ const Navigation: React.FC = () => {
             <ThemeSwitcher />
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden">
+            <div className="hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"

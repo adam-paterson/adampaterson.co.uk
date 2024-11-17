@@ -26,27 +26,57 @@ const Hero: React.FC<HeroProps> = ({ roles }) => {
           I <AnimatedRoles roles={roles} />
         </div>
         <p className="text-lg sm:text-xl max-w-2xl mb-12 text-slate-600 dark:text-slate-400 leading-relaxed">
-          Technical Solution Engineer with 14 years of experience in e-commerce development.
-          Exploring the intersection of AI and digital commerce to create innovative shopping experiences.
+          I'm a full stack developer with experience across web, mobile apps, and game development. Currently
+          focused on building intelligent applications powered by Large Language Models and exploring new frontiers in AI.
         </p>
         <div className="flex flex-wrap gap-6">
           <motion.a
             href="#services"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ 
+              y: -4,
+              boxShadow: "0 10px 20px -10px rgba(0,0,0,0.2)"
+            }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 rounded-lg bg-neutral-900 dark:bg-neutral-700 text-white 
-                     hover:bg-neutral-800 dark:hover:bg-neutral-600 transition-all duration-300 shadow-lg"
+            className="relative px-8 py-3 rounded-lg bg-neutral-900 dark:bg-neutral-700 text-white 
+                     hover:bg-neutral-800 dark:hover:bg-neutral-600 transition-colors duration-300"
           >
+            <motion.span
+              className="absolute inset-0 rounded-lg bg-white/10"
+              animate={{
+                opacity: [0, 0.2, 0]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            />
             View Services
           </motion.a>
+          
           <motion.a
             href="mailto:hello@adampaterson.co.uk"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ 
+              y: -4,
+              boxShadow: "0 10px 20px -10px rgba(0,0,0,0.1)"
+            }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 rounded-lg border-2 border-neutral-600 dark:border-neutral-400
+            className="relative px-8 py-3 rounded-lg border-2 border-neutral-600 dark:border-neutral-400
                      text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900/10
-                     transition-all duration-300"
+                     transition-colors duration-300"
           >
+            <motion.span
+              className="absolute inset-0 rounded-lg bg-neutral-600/10 dark:bg-neutral-400/10"
+              animate={{
+                opacity: [0, 0.1, 0]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse",
+                delay: 1
+              }}
+            />
             Get in Touch
           </motion.a>
         </div>

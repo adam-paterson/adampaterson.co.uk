@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Stars from './Stars';
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 interface TimelineEntry {
   date: string;
@@ -105,225 +107,173 @@ const timeline: TimelineEntry[] = [
   },
 ];
 
-const INITIAL_DISPLAY_COUNT = 2;
-
 const CareerTimeline: React.FC = () => {
-  const [expandedCard, setExpandedCard] = useState<number | null>(null);
-  const [showAllEntries, setShowAllEntries] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const displayedTimeline = showAllEntries
-    ? timeline
-    : timeline.slice(0, INITIAL_DISPLAY_COUNT);
+  const navigate = (newDirection: number) => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setDirection(newDirection);
+    setCurrentIndex((prev) => {
+      if (newDirection === 1) {
+        return prev === timeline.length - 1 ? 0 : prev + 1;
+      }
+      return prev === 0 ? timeline.length - 1 : prev - 1;
+    });
+
+    setTimeout(() => setIsAnimating(false), 500);
+  };
 
   return (
-    <div className="relative">
-      {/* Timeline Line - centered on mobile */}
-      <div className="absolute left-1/2 md:left-1/2 h-full w-px bg-gradient-to-b from-neutral-400/50 via-neutral-600 to-neutral-400/50 dark:from-neutral-500/50 dark:via-neutral-400 dark:to-neutral-500/50 transform -translate-x-1/2" />
+    <div className="relative min-h-[600px] overflow-hidden" ref={containerRef}>
+      <Stars className="absolute inset-0" />
+      
+      {/* Navigation Controls */}
+      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between items-center px-4 z-20">
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => navigate(-1)}
+          className="p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+          disabled={isAnimating}
+        >
+          <FiChevronLeft className="w-6 h-6" />
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => navigate(1)}
+          className="p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+          disabled={isAnimating}
+        >
+          <FiChevronRight className="w-6 h-6" />
+        </motion.button>
+      </div>
 
-      {/* Timeline Entries */}
+      {/* Rocket */}
       <AnimatePresence mode="wait">
-        {displayedTimeline.map((entry, index) => (
+        <motion.div
+          key={`rocket-${currentIndex}-${direction}`}
+          className="absolute top-1/2 -translate-y-1/2 z-10 w-8 h-8"
+          initial={{ 
+            x: direction === 1 ? '-10%' : '110%',
+            opacity: 0
+          }}
+          animate={{ 
+            x: direction === 1 ? '110%' : '-10%',
+            opacity: [0, 1, 1, 0]
+          }}
+          exit={{ opacity: 0 }}
+          transition={{
+            x: { duration: 0.5, ease: "easeInOut" },
+            opacity: { duration: 0.5, times: [0, 0.1, 0.9, 1] }
+          }}
+        >
           <motion.div
-            key={entry.company}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className={`relative flex flex-col md:flex-row ${
-              index % 2 === 0 ? "md:flex-row-reverse" : ""
-            } mb-12 md:mb-24 timeline-entry`}
+            className="w-full h-full"
+            initial={{ rotate: direction === 1 ? 0 : 180 }}
+            animate={{ rotate: direction === 1 ? 0 : 180 }}
           >
-            {/* Date bubble with pulse effect - centered on mobile */}
-            <div className="absolute left-1/2 md:left-1/2 w-8 h-8 bg-neutral-800 dark:bg-neutral-400 rounded-full transform -translate-x-1/2 flex items-center justify-center">
-              <div className="w-4 h-4 bg-white dark:bg-neutral-900 rounded-full" />
-              <div className="absolute w-12 h-12 bg-neutral-800 dark:bg-neutral-400 rounded-full opacity-20 animate-ping" />
-            </div>
-
-            {/* Content - centered on mobile */}
-            <div
-              className={`w-full md:w-5/12 ${
-                index % 2 === 0 ? "md:pl-12" : "md:pr-12"
-              } pl-0 md:pl-0 ml-auto mr-auto md:ml-0 md:mr-0 max-w-[calc(100%-3rem)] md:max-w-none`}
-            >
-              <motion.div
-                className="bg-white dark:bg-neutral-800/50 p-6 rounded-xl shadow-lg hover:shadow-xl 
-                           transition-all duration-300 relative overflow-hidden group backdrop-blur-sm
-                           border border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600"
-                whileHover={{ scale: 1.02 }}
-                onClick={() =>
-                  setExpandedCard(expandedCard === index ? null : index)
-                }
-              >
-                {/* Company Logo with improved styling */}
-                <div className="absolute top-4 right-4 w-16 h-16 bg-neutral-50 dark:bg-neutral-700/50 
-                                rounded-xl flex items-center justify-center transform group-hover:scale-110 
-                                transition-transform duration-300 backdrop-blur-sm border border-neutral-200 dark:border-neutral-600">
-                  <img
-                    src={entry.companyLogo}
-                    alt={`${entry.company} logo`}
-                    className="w-12 h-12 object-contain p-1"
-                  />
-                </div>
-
-                {/* Date Badge with gradient */}
-                <span className="inline-block text-sm text-white font-mono bg-gradient-to-r 
-                                 from-neutral-800 to-neutral-600 dark:from-neutral-600 dark:to-neutral-700 
-                                 px-3 py-1 rounded-full mb-3">
-                  {entry.date}
-                </span>
-
-                {/* Title and Company */}
-                <h3 className="text-xl font-bold mt-2 mb-1 pr-20">
-                  {entry.title}
-                </h3>
-                <h4 className="text-lg text-slate-600 dark:text-slate-400 mb-3">
-                  {entry.company}
-                </h4>
-
-                {/* Description */}
-                <p className="text-slate-700 dark:text-slate-300 mb-4">
-                  {entry.description}
-                </p>
-
-                {/* Expanded Content */}
-                <AnimatePresence>
-                  {expandedCard === index && entry.achievements && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <h5 className="font-bold text-lg mb-2 text-neutral-800 dark:text-neutral-400">
-                        Key Achievements
-                      </h5>
-                      <ul className="list-disc list-inside mb-4 space-y-2">
-                        {entry.achievements.map((achievement, i) => (
-                          <li
-                            key={i}
-                            className="text-slate-700 dark:text-slate-300"
-                          >
-                            {achievement}
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Expand/Collapse Indicator */}
-                {entry.achievements && (
-                  <motion.div
-                    className="absolute bottom-4 right-4 text-neutral-600 dark:text-neutral-400"
-                    animate={{ rotate: expandedCard === index ? 180 : 0 }}
-                  >
-                    ↓
-                  </motion.div>
-                )}
-              </motion.div>
-            </div>
-          </motion.div>
-        ))}
-
-        {/* "View More" Button */}
-        {!showAllEntries && timeline.length > INITIAL_DISPLAY_COUNT && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="text-center mt-12 relative z-10"
-          >
-            <motion.button
-              onClick={() => setShowAllEntries(true)}
-              className="group relative inline-flex items-center gap-2 bg-neutral-900 dark:bg-neutral-700 text-white px-8 py-3 rounded-lg hover:opacity-90 transition-all duration-300 hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>Journey Further Back</span>
-              <motion.svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                animate={{
-                  y: [0, -3, 0],
-                  rotate: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                />
-              </motion.svg>
-            </motion.button>
-          </motion.div>
-        )}
-
-        {/* "Show Less" Button */}
-        {showAllEntries && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="text-center mt-12"
-          >
-            <motion.button
-              onClick={() => {
-                setShowAllEntries(false);
-                // Smooth scroll to the last visible entry
-                document
-                  .querySelectorAll(".timeline-entry")
-                  [INITIAL_DISPLAY_COUNT - 1]?.scrollIntoView({
-                    behavior: "smooth",
-                  });
+            <svg 
+              viewBox="0 0 24 24" 
+              className="w-full h-full"
+              style={{
+                filter: "drop-shadow(0 0 10px rgba(255,255,255,0.3))"
               }}
-              className="group inline-flex items-center gap-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-8 py-3 rounded-lg hover:opacity-90 transition-all duration-300 hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
-              <span>Show Recent Positions</span>
-              <motion.svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <path
+                fill="currentColor"
+                d="M13.13 22.19L11.5 18.36C13.07 17.78 14.54 17 15.9 16.09L13.13 22.19M5.64 12.5L1.81 10.87L7.91 8.1C7 9.46 6.22 10.93 5.64 12.5M19.22 4C19.5 4 19.75 4 19.96 4.05C20.13 5.44 19.94 8.3 16.66 11.58C14.96 13.29 12.93 14.6 10.65 15.47L8.5 13.37C9.42 11.06 10.73 9.03 12.42 7.34C15.18 4.58 17.64 4 19.22 4M19.22 2C17.24 2 14.24 2.69 11 5.93C8.81 8.12 7.5 10.53 6.65 12.64C6.37 13.39 6.56 14.21 7.11 14.77L9.24 16.89C9.62 17.27 10.13 17.5 10.66 17.5C10.89 17.5 11.13 17.44 11.36 17.35C13.5 16.53 15.88 15.19 18.07 13C23.73 7.34 21.61 2.39 21.61 2.39S20.7 2 19.22 2Z"
+              />
+              <motion.path
+                fill="#FF6B6B"
+                d="M4 12c0-1.1.9-2 2-2s2 .9 2 2s-.9 2-2 2s-2-.9-2-2z"
                 animate={{
-                  y: [0, 3, 0],
-                  rotate: [0, 10, 0],
+                  opacity: [0.4, 1, 0.4],
+                  scale: [0.8, 1, 0.8],
                 }}
                 transition={{
-                  duration: 1.5,
+                  duration: 0.3,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "easeInOut"
                 }}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 10l7-7m0 0l7 7m-7-7v18"
-                />
-              </motion.svg>
-            </motion.button>
+              />
+            </svg>
           </motion.div>
-        )}
+        </motion.div>
       </AnimatePresence>
 
-      {/* Gradient Overlay at the bottom */}
-      {!showAllEntries && timeline.length > INITIAL_DISPLAY_COUNT && (
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-off-white dark:from-dark-bg to-transparent pointer-events-none" />
-      )}
+      {/* Timeline Cards */}
+      <div className="relative pt-16 pb-8">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ 
+              opacity: 0,
+              x: direction === 1 ? 100 : -100 
+            }}
+            animate={{ 
+              opacity: 1,
+              x: 0 
+            }}
+            exit={{ 
+              opacity: 0,
+              x: direction === 1 ? -100 : 100 
+            }}
+            transition={{
+              duration: 0.5,
+              ease: "easeInOut"
+            }}
+            className="max-w-2xl mx-auto"
+          >
+            <div className="card p-6 backdrop-blur-sm">
+              <div className="flex items-center gap-4 mb-4">
+                <img 
+                  src={timeline[currentIndex].companyLogo} 
+                  alt={timeline[currentIndex].company}
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <h3 className="text-xl font-bold">{timeline[currentIndex].title}</h3>
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    {timeline[currentIndex].company} • {timeline[currentIndex].date}
+                  </p>
+                </div>
+              </div>
+              <p className="text-neutral-700 dark:text-neutral-300 mb-4">
+                {timeline[currentIndex].description}
+              </p>
+              {timeline[currentIndex].achievements && (
+                <ul className="list-disc list-inside space-y-2 text-neutral-600 dark:text-neutral-400">
+                  {timeline[currentIndex].achievements.map((achievement, i) => (
+                    <li key={i}>{achievement}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Progress Indicators */}
+        <div className="flex justify-center gap-2 mt-8">
+          {timeline.map((_, index) => (
+            <motion.div
+              key={index}
+              className={`w-2 h-2 rounded-full cursor-pointer ${
+                index === currentIndex 
+                  ? 'bg-neutral-800 dark:bg-neutral-200' 
+                  : 'bg-neutral-300 dark:bg-neutral-700'
+              }`}
+              whileHover={{ scale: 1.2 }}
+              onClick={() => setCurrentIndex(index)}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
