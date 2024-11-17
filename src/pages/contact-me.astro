@@ -209,27 +209,45 @@ const allFields: FieldGroup = {
 </Layout>
 
 <script>
-  // Simplified JavaScript just for showing/hiding fields
-  document.querySelectorAll('input[name="contact_reason"]').forEach(radio => {
-    radio.addEventListener('change', (e) => {
-      // Hide all field groups
-      document.querySelectorAll('[id^="fields-"]').forEach(group => {
-        group.classList.add('hidden');
-      });
+  const FUNCTION_URL = 'YOUR_CLOUD_FUNCTION_URL';
 
-      // Show selected field group
-      const selectedReason = (e.target as HTMLInputElement).value;
-      const fieldsToShow = document.getElementById(`fields-${selectedReason}`);
-      if (fieldsToShow) {
-        fieldsToShow.classList.remove('hidden');
+  document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const form = e.target as HTMLFormElement;
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    
+    try {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+      
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      
+      const response = await fetch(FUNCTION_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to send message');
       }
-
-      // Update selected pill styling
-      document.querySelectorAll('.reason-pill').forEach(pill => {
-        pill.classList.remove('selected');
-      });
-      (e.target as HTMLElement).closest('.reason-pill')?.classList.add('selected');
-    });
+      
+      // Clear form
+      form.reset();
+      
+      // Show success message
+      alert('Message sent successfully!');
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Failed to send message. Please try again.');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send Message';
+    }
   });
 </script>
 

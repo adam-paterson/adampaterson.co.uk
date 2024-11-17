@@ -1,0 +1,40 @@
+name: Deploy Cloud Function
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'functions/contact-form/**'
+      - '.github/workflows/deploy-function.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: '${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.GCP_SA_EMAIL }}'
+
+      - id: 'deploy'
+        uses: 'google-github-actions/deploy-cloud-functions@v2'
+        with:
+          name: 'contact-form'
+          runtime: 'nodejs20'
+          region: 'europe-west2'
+          source_dir: './functions/contact-form'
+          entry_point: 'handleContactForm'
+          https_trigger_security_level: 'secure_always'
+          memory_mb: 256
+          timeout: 60s
+          min_instances: 0
+          max_instances: 1
+          ingress_settings: 'ALLOW_ALL'
+          service_account_email: '${{ secrets.GCP_SA_EMAIL }}' 

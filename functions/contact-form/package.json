@@ -1,0 +1,22 @@
+{
+  "name": "contact-form",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "functions-framework --source=dist/index.js --target=handleContactForm",
+    "watch": "concurrently \"tsc -w\" \"nodemon --watch ./dist/ --exec npm run start\"",
+    "deploy": "npm run build && gcloud functions deploy contact-form --gen2 --runtime=nodejs20 --region=europe-west2 --source=. --entry-point=handleContactForm --trigger-http --allow-unauthenticated"
+  },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.0.0",
+    "googleapis": "^128.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "concurrently": "^8.0.0",
+    "nodemon": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+} 
