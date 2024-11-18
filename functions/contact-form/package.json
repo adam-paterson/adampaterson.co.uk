@@ -10,16 +10,13 @@
     "deploy": "npm run build && gcloud functions deploy contact-form --gen2 --runtime=nodejs20 --region=europe-west2 --source=. --entry-point=handleContactForm --trigger-http --allow-unauthenticated"
   },
   "dependencies": {
-    "@google-cloud/functions-framework": "^3.0.0",
-    "googleapis": "^128.0.0",
-    "@google-cloud/local-auth": "^2.1.0",
-    "google-auth-library": "^8.7.0"
+    "@google-cloud/functions-framework": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@types/express": "^4.17.13",
     "concurrently": "^8.0.0",
-    "nodemon": "^3.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "nodemon": "^3.0.0"
   }
-} 
+}
