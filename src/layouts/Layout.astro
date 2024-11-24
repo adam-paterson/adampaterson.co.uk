@@ -70,6 +70,30 @@ const structuredData = {
 			}
 		</script>
 		<GoogleTagManager />
+		<!-- Primary Meta Tags -->
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalURL} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		{image && <meta name="twitter:image" content={new URL(image, Astro.site).href} />}
+
+		<!-- Person Schema -->
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+		<!-- Additional head content -->
+		<slot name="head" />
 	</head>
 	<body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50">
 		<!-- Background subtle gradient -->
