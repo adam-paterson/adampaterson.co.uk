@@ -1,0 +1,25 @@
+# Adam Paterson
+
+> Full-stack developer with over 15 years of experience in web, mobile app, and game development. Currently focused on building intelligent applications powered by Large Language Models (LLMs) and exploring new frontiers in AI.
+
+## Expertise
+
+- **AI Applications**: Integrating LLMs with business processes to enhance efficiency and innovation.
+- **E-commerce Solutions**: Architecting and implementing scalable e-commerce platforms, including Shopify, BigCommerce, Adobe Commerce, and Shopware.
+- **Web Applications**: Developing custom web applications using modern technologies and best practices.
+
+## Technologies
+
+- **AI & ML**: Python, PyTorch, TensorFlow, OpenAI, AutoGen, Anthropic.
+- **Frontend**: JavaScript, TypeScript, React, Vue.js, Next.js, TailwindCSS.
+- **Backend**: PHP, Node.js, Laravel, Symfony, Ruby, Ruby on Rails, Zend.
+- **Infrastructure**: AWS, Docker, Kubernetes, Terraform.
+- **E-commerce**: Shopify, Magento, BigCommerce.
+
+## Professional Experience
+
+- **Technical Solutions Engineer at IDHL (2022 - Present)**: Leading technical solutions for enterprise e-commerce clients, specializing in Adobe Commerce, Shopify, and modern headless architectures. Exploring AI integration opportunities for enhanced e-commerce experiences.
+
+## Contact
+
+For collaboration or inquiries, please visit [adampaterson.co.uk/contact](https://adampaterson.co.uk/contact) or email [email protected].
