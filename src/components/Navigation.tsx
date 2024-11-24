@@ -9,7 +9,6 @@ const Navigation: React.FC = () => {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about-me" },
-    { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact-me" },
   ];
 
