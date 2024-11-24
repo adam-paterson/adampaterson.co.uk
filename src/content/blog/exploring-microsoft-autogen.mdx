@@ -1,6 +1,310 @@
 ---
-title: "Understanding Microsoft AutoGen: Building Multi-Agent Systems Through Conversation"
-date: "2023-11-19"
+title: "Microsoft AutoGen: Conversational Multi-Agent AI Framework"
+date: "2024-11-19"
 excerpt: "A deep dive into AutoGen's conversational architecture and how it's revolutionizing multi-agent AI systems."
-tags: ["AutoGen", "AI", "Microsoft", "multi-agent systems"]
+tags: ["AutoGen", "AI", "multi-agent systems"]
+image: "/images/agent-network.png"
 ---
+
+## Introduction
+Microsoft Research has introduced AutoGen, an open-source framework designed to revolutionize the development of applications utilizing large language models (LLMs). AutoGen enables the creation of multi-agent conversation systems, where AI agents interact dynamically with each other—and with humans or external tools—to accomplish complex tasks. This collaborative approach allows for more flexible and efficient problem-solving across various domains.
+
+By placing conversations at the core of its architecture, AutoGen offers a scalable and adaptable solution for crafting advanced AI applications. Whether it’s tackling intricate mathematical problems, optimizing supply-chain decisions, or creating engaging AI-driven experiences, AutoGen empowers developers, researchers, and businesses to build intelligent systems that can learn, adapt, and collaborate effectively.
+
+## Getting Started with AutoGen
+Before diving deep into AutoGen's architecture, let's see it in action with a simple example:
+
+### Prerequisites
+- Python 3.8+
+- OpenAI API key or other supported LLM provider
+
+### Installation
+```bash
+pip install pyautogen
+```
+
+### Basic Setup
+
+```python
+from autogen import AssistantAgent, UserProxyAgent
+
+# Create an AI assistant agent
+assistant = AssistantAgent(
+    name="assistant",
+    llm_config={"model": "gpt-4"}
+)
+
+# Create a user proxy agent
+user_proxy = UserProxyAgent(
+    name="user_proxy",
+    code_execution_config={"use_docker": False}
+)
+
+# Start a simple task
+task = """
+Please write a python function that:
+    1. Calculates the fibonacci sequence up to 1000
+    2. Tests the implementation
+"""
+
+# Initiate a chat with the user proxy agent
+chat_messages = user_proxy.initiate_chat(assistant, message=task)
+```
+
+<img src="/images/autogen-example.png" alt="AutoGen example" className="w-full shadow-none" />
+
+### A Practical Example: Code Review Assistant
+Let's create a simple code review system that demonstrates AutoGen's multi-agent capabilities:
+
+
+```python
+from autogen import AssistantAgent, UserProxyAgent, GroupChat, GroupChatManager
+
+user_proxy = UserProxyAgent(
+    name="user_proxy",
+    code_execution_config={"use_docker": False}
+)
+
+code_reviewer = AssistantAgent(
+    name="reviewer",
+    system_message="You are a senior developer who reviews code for best practices.",
+    llm_config={"model": "gpt-4"}
+)
+
+security_checker = AssistantAgent(
+    name="security",
+    system_message="You are a security expert who checks code for vulnerabilities.",
+    llm_config={"model": "gpt-4"}
+)
+
+# Sample code to review
+
+code_to_review = """
+    def get_user_data(user_id):
+        query = f"SELECT FROM users WHERE id = {user_id}"
+        return database.execute(query)
+"""
+
+# Start the review process
+
+groupchat = GroupChat(
+    agents=[user_proxy, code_reviewer, security_checker],
+    messages=[],
+    max_round=20
+)
+
+manager = GroupChatManager(groupchat=groupchat, llm_config={"model": "gpt-4"})
+
+user_proxy.initiate_chat(manager, message=f"Please review this code:\n{code_to_review}")
+
+```
+
+In this example, multiple agents collaborate to provide comprehensive code review feedback.
+
+<img src="/images/autogen-code-review-example.png" alt="AutoGen code review" className="w-full shadow-none" />
+
+
+## Conversable Agents: Building Blocks for Collaboration
+
+At the heart of AutoGen are Conversable Agents—modular, configurable entities designed for seamless multi-agent communication. Unlike static single-purpose AI models, conversable agents are highly customisable and capable of dynamic interactions. They form the backbone of AutoGen’s ability to tackle diverse and complex tasks.
+
+### What Makes an Agent Conversable?
+- **Message Exchange**: Agents can send and receive messages autonomously, enabling them to hold conversations with other agents, humans, or external tools.
+- **Customisable Roles**: Each agent can be configured for specific tasks, such as:
+  - **Assistant Agents**: Powered by LLMs for problem-solving and decision-making.
+  - **User Proxy Agents**: Acting as bridges between humans, tools, and AI, they can execute code, solicit human input, or integrate external functionalities.
+- **Autonomous or Guided Modes**: Agents can operate independently or involve humans as needed, offering flexibility in execution.
+
+### Key Features of Conversable Agents
+
+- **Built-in Support for LLMs, Humans, and Tools**: Agents can perform tasks like reasoning, code execution, or interactive problem-solving by leveraging advanced LLM capabilities or human oversight.
+- **Modularity and Reusability**: Agents can be developed, tested, and deployed individually, simplifying workflows and encouraging reuse across projects.
+- **Error Handling and Feedback Loops**: With built-in capabilities for error detection and recovery, agents can adapt and refine their approaches dynamically.
+
+---
+
+## Conversation Programming: Designing Intelligent Workflows
+AutoGen simplifies complex workflows by introducing a conversation-first paradigm, where inter-agent interactions drive the logic and control flow. This programming model is both intuitive and powerful, combining the strengths of natural language and traditional code.
+
+### How Conversation Programming Works
+
+1. **Define Agents**: Developers create and configure agents with distinct roles and capabilities.
+```python
+assistant = AssistantAgent(
+    name="assistant",
+    llm_config={"model": "gpt-4", "temperature": 0.7}
+)
+
+user_proxy = UserProxyAgent(
+    name="user_proxy",
+    code_execution_config={"use_docker": False}
+)
+```
+
+2. **Set Up Conversations**: Agents interact through unified interfaces like send, receive, and generate_reply.
+```python
+group_chat = GroupChat(
+    agents=[assistant, user_proxy],
+    messages=[],
+    max_round=10
+)
+
+manager = GroupChatManager(groupchat=group_chat)
+```
+
+3. **Control Flow Through Conversations**: Conversations determine task progress, decision-making, and agent coordination. Agents exchange messages dynamically, allowing workflows to evolve in real time.
+
+### Built-In Conversation Patterns
+
+AutoGen supports diverse conversation workflows:
+- **Two-Agent Chats**: Simple back-and-forth communication.
+- **Sequential Chats**: Step-by-step interactions for interdependent tasks.
+- **Nested Chats**: One agent’s internal monologue involves other agents to solve subtasks.
+- **Group Chats**: Dynamic, context-aware conversations among multiple agents.
+
+### Blending Natural and Programming Languages
+
+AutoGen bridges natural language and code:
+- **Natural Language Prompts**: Control workflows by crafting prompts that agents interpret.
+- **Code-Driven Logic**: Developers can define termination conditions, error recovery, or execution triggers programmatically.
+
+**Example**: Multi-Agent Problem-Solving
+
+Here’s a quick look at AutoGen in action for a coding task:
+
+```python
+task = """
+    Research algorithms for text similarity.
+    Implement the best in Python.
+    Write test cases and optimise the implementation.
+"""
+
+chat_messages = user_proxy.initiate_chat(manager, message=task)
+```
+
+Agents dynamically decompose the task, execute the code, and refine the solution collaboratively.
+
+Why this matters:
+
+- **Flexibility**: AutoGen adapts to a wide range of use cases, from real-time Q&A systems to complex operational planning.
+- **Scalability**: Modular agents and conversation-driven workflows scale effortlessly from simple tasks to multi-agent ecosystems.
+- **Ease of Development**: By unifying conversational and programmatic paradigms, AutoGen empowers developers to create intelligent workflows without extensive overhead.
+
+Together, Conversable Agents and Conversation Programming lay the foundation for AutoGen’s transformative capabilities, enabling developers to build smarter, more collaborative AI systems than ever before.
+
+## Applications and Case Studies: AutoGen in Action
+Microsoft has showcased AutoGen in action in various real-world applications during their research.
+
+### Mathematics Problem Solving: Redefining AI Tutoring
+AutoGen has shown remarkable capability in solving complex mathematical problems, particularly those requiring multi-step reasoning and validation.
+
+**The Challenge**:
+Mathematics often demands a blend of problem decomposition, logical reasoning, and iterative validation—tasks that single-agent systems struggle to manage efficiently.
+
+**How AutoGen Tackles It**:
+Using two conversable agents, AutoGen creates a collaborative system:
+- **Reasoning Agent**: Breaks down the problem into smaller tasks, proposes solutions, and explains reasoning.
+- **Validation Agent**: Reviews the solutions for accuracy and logic, flagging errors or proposing improvements.
+
+**Example Scenario**:
+A high-level math problem, such as proving a geometric theorem, is assigned to the system. The Reasoning Agent drafts a proof, and the Validation Agent critiques and refines it through multiple conversational turns.
+
+**Results**:
+AutoGen outperformed competitors like LangChain, single-agent GPT-4, and other state-of-the-art frameworks, achieving higher accuracy in benchmark tests. This modular, conversational approach opens possibilities for personalised AI tutors capable of explaining solutions step-by-step.
+
+---
+### Supply-Chain Optimisation: Smarter Decision-Making
+AutoGen streamlines operational planning with its multi-agent design, transforming how businesses approach supply-chain challenges.
+
+**The Challenge**:
+Complex “what-if” scenarios, such as changing supplier restrictions or re-routing logistics, require simultaneous code execution, safety validation, and optimisation.
+
+**How AutoGen Tackles It**:
+AutoGen orchestrates multiple agents to handle distinct aspects of the task:
+- **Commander Agent**: Acts as the manager, coordinating the workflow and delegating subtasks.
+- **Writer Agent**: Crafts the Python code needed to simulate the scenario.
+- **Safeguard Agent**: Reviews the generated code for potential risks or errors, ensuring safe execution.
+
+**Example Scenario**:
+A user asks, “What happens if we restrict Supplier A from shipping to Warehouse B?” The Commander Agent triggers the Writer Agent to generate a simulation script. Before execution, the Safeguard Agent validates the script, ensuring no unsafe operations. The final output presents the simulated impact on costs and timelines.
+
+**Impact**:
+By reducing workflow code complexity from 430 lines to just 100, AutoGen enhances productivity while boosting safety and reliability. Its collaborative framework also reduces the user’s effort by up to 3-5x compared to traditional approaches.
+
+### Retrieval-Augmented Q&A: Dynamic Knowledge Integration
+
+AutoGen excels at building retrieval-augmented systems that dynamically integrate external knowledge sources.
+
+**The Challenge**:
+LLMs often lack the ability to fetch or update knowledge during runtime, leading to incomplete or inaccurate responses in knowledge-intensive tasks.
+
+**How AutoGen Tackles It**:
+AutoGen uses retrieval-augmented agents that interact seamlessly:
+- **Retrieval-augmented Assistant Agent**: Processes user queries and synthesises information from multiple sources.
+- **Retrieval-augmented User Proxy Agent**: Dynamically queries external databases or documents to retrieve context-specific information.
+
+**Example Scenario**:
+A user asks, “What were the key factors in the 2008 financial crisis?” If the initial retrieved documents lack sufficient detail, the User Proxy Agent prompts a refined search. The Assistant Agent uses the updated context to generate a comprehensive answer.
+
+**Impact**:
+AutoGen’s interactive retrieval mechanism improves recall and accuracy by over 20% compared to static retrieval systems. It dynamically refines searches and avoids premature termination, ensuring high-quality answers.
+
+### Coding Tasks: Collaborative Development at Scale
+
+AutoGen’s agents shine in coding workflows, where generating, testing, and refining code require precision and adaptability.
+
+**The Challenge**:
+Programming tasks often involve iterative development, testing, and debugging. Relying on a single agent limits scalability and introduces higher error rates.
+
+**How AutoGen Tackles It**:
+A team of agents works collaboratively:
+- **Research Agent**: Gathers information on best practices or algorithms.
+- **Developer Agent**: Writes the initial implementation.
+- **Tester Agent**: Runs test cases and suggests refinements.
+
+**Example Scenario**:
+A user requests a text similarity algorithm in Python. The Research Agent identifies cosine similarity as a viable approach. The Developer Agent writes the code, while the Tester Agent ensures it passes a set of predefined test cases. Any failures trigger further iterations.
+
+**Impact**:
+AutoGen accelerates coding workflows and ensures robust solutions. Its multi-agent collaboration model reduces human intervention and increases task success rates, even for advanced programming challenges.
+
+The potential of AutoGen is vast. Its current capabilities have already shown promise, but the true magic lies in how developers, researchers, and businesses leverage it to solve the challenges of tomorrow. As the framework evolves, we can expect to see:
+- Smarter, safer multi-agent systems.
+- Interdisciplinary breakthroughs.
+- Personalised AI that feels more human than ever.
+
+---
+
+## Limitations and Considerations
+### Current Limitations
+- **Token Context Windows**: LLMs have fixed context windows (e.g., 4K-32K tokens) which limit conversation length. Long conversations may lose earlier context, affecting agent performance.
+- **Cost Implications**: Running multiple agents with GPT-4 can quickly become expensive. A typical multi-agent conversation might use 2-3x more tokens than a single agent.
+- **Latency Issues**: Multi-agent conversations require multiple API calls, leading to increased response times. Each agent interaction adds 1-2 seconds of latency.
+- **Limited Memory**: Agents don't maintain state between sessions by default. Each new session starts fresh, requiring context to be rebuilt.
+
+### Common Pitfalls
+- **Infinite Loops**: Agents can get stuck in circular conversations, especially when:
+  - Error handling is too generic
+  - Task completion criteria are unclear
+  - Agents keep requesting clarification from each other
+- **Token Usage**: Without proper monitoring, costs can spiral due to:
+  - Unnecessary message verbosity
+  - Repeated information in context
+  - Failed to implement conversation pruning
+- **Non-Deterministic Outputs**: The same input might produce different results because:
+  - Temperature settings affect randomness
+  - Context window limitations cause inconsistent memory
+  - Multiple agents may reach different conclusions
+- **Security Risks**: Unrestricted code execution can lead to:
+  - Resource exhaustion
+  - Unauthorized system access
+  - Data leakage
+
+
+## Ready to explore AutoGen further?
+
+Now is the perfect time to start experimenting with its capabilities. Dive into the world of multi-agent systems and discover how AutoGen can transform the way you think about AI.
+
+- 📄 **Learn More**: For a deeper understanding of AutoGen’s architecture, capabilities, and real-world applications, check out the official research paper: [AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation](https://www.microsoft.com/en-us/research/uploads/prod/2023/08/LLM_agent.pdf).
+- 👨‍💻 **Get Started**: Visit the [AutoGen GitHub Repository](https://github.com/microsoft/AutoGen) for documentation, installation instructions, and examples to begin your journey.
+

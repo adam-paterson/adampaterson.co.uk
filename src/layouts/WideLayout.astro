@@ -1,0 +1,50 @@
+---
+import ThemeSwitcher from '../components/ThemeSwitcher';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
+import GoogleTagManager from '../components/GoogleTagManager.astro';
+
+export interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	canonicalURL?: string;
+}
+
+const { 
+	title,
+	description = "Technical Solution Engineer with 14 years of e-commerce expertise, transitioning into AI consulting. Specializing in enterprise e-commerce architecture and emerging AI technologies.",
+	image = "/og-image.jpg",
+	canonicalURL = new URL(Astro.url.pathname, Astro.site).href
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<link rel="canonical" href={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={image} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={image} />
+	</head>
+	<body class="dark:bg-gray-900 dark:text-white">
+		<GoogleTagManager />
+		<Navigation />
+		<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
