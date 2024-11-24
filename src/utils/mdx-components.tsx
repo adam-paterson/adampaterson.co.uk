@@ -1,3 +1,4 @@
+import React from 'react';
 import type { MDXComponents } from 'mdx/types';
 import CodeBlock from '../components/CodeBlock';
 

@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "adampaterson.co.uk",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^2.3.1",
     "@astrojs/react": "^3.6.2",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.2",
@@ -30,5 +31,11 @@
     "simple-icons": "^13.18.0",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/prismjs": "^1.26.5",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "reactflow": "^11.11.4"
   }
 }

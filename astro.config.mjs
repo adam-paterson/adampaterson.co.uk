@@ -13,8 +13,5 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: "https://www.adampaterson.co.uk",
   base: "/",
-  integrations: [react(), tailwind(), sitemap(), mdx()],
-  content: {
-    sources: ['./src/content']
-  }
+  integrations: [react(), tailwind(), sitemap(), mdx()]
 });

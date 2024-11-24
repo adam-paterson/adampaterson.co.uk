@@ -14,8 +14,7 @@ try {
     slug: post.slug,
     title: post.data.title,
     date: post.data.date,
-    body: post.body.slice(0, 100),
-    _raw: post._raw // This will show us the raw file info
+    body: post.body.slice(0, 100)
   })));
 } catch (e) {
   error = e;
@@ -33,7 +32,9 @@ if (posts.length > 0) {
 	<main class="container mx-auto px-4 py-8">
 		<h1 class="text-4xl font-bold mb-8">Blog</h1>
 		{error && (
-			<p class="text-red-600 dark:text-red-400">Error loading articles: {error.message}</p>
+			<p class="text-red-600 dark:text-red-400">
+				Error loading articles: {error instanceof Error ? error.message : 'Unknown error'}
+			</p>
 		)}
 		{posts.length === 0 ? (
 			<div class="space-y-4">
