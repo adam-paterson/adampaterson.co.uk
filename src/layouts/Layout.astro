@@ -3,6 +3,7 @@ import ThemeSwitcher from '../components/ThemeSwitcher';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
+import Stars from '../components/Stars';
 
 export interface Props {
 	title: string;
@@ -11,11 +12,11 @@ export interface Props {
 	canonicalURL?: string;
 }
 
-const { 
-	title,
-	description = "Technical Solution Engineer with 14 years of e-commerce expertise, transitioning into AI consulting. Specializing in enterprise e-commerce architecture and emerging AI technologies.",
-	image = "/og-image.jpg",
-	canonicalURL = new URL(Astro.url.pathname, Astro.site).href
+const {
+        title,
+        description = "Technical Solution Engineer with over 15 years of e-commerce expertise and a polyglot background, exploring the intersection of AI and digital commerce.",
+        image = "/og-image.jpg",
+        canonicalURL = new URL(Astro.url.pathname, Astro.site).href
 } = Astro.props;
 
 const structuredData = {
@@ -71,9 +72,10 @@ const structuredData = {
 		</script>
 		<GoogleTagManager />
 		<!-- Primary Meta Tags -->
-		<meta name="title" content={title} />
-		<meta name="description" content={description} />
-		<link rel="canonical" href={canonicalURL} />
+                <meta name="title" content={title} />
+                <meta name="description" content={description} />
+                <meta name="keywords" content="Adam Paterson, software engineer, e-commerce expert, AI consultant, polyglot developer, digital commerce, emerging technologies" />
+                <link rel="canonical" href={canonicalURL} />
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
@@ -95,9 +97,10 @@ const structuredData = {
 		<!-- Additional head content -->
 		<slot name="head" />
 	</head>
-	<body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50">
-		<!-- Background subtle gradient -->
-		<div class="fixed inset-0 bg-gradient-to-br from-blue-50 to-violet-50 dark:from-slate-900 dark:to-slate-800 -z-10"></div>
+        <body class="bg-space-light dark:bg-space-dark text-slate-900 dark:text-slate-50">
+                <!-- Background star field -->
+                <Stars client:load className="fixed inset-0 -z-10" />
+                <div class="fixed inset-0 bg-gradient-to-br from-blue-50/30 to-violet-50/30 dark:from-slate-900/60 dark:to-slate-800/60 -z-20"></div>
 		
 		<!-- Navigation - Removed the nav element and using the Navigation component -->
 		<Navigation client:load />

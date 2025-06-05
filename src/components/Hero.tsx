@@ -25,8 +25,7 @@ const Hero: React.FC<HeroProps> = ({ roles = [] }) => {
           I <AnimatedRoles />
         </div>
         <p className="text-lg sm:text-xl max-w-2xl mb-12 text-slate-600 dark:text-slate-400 leading-relaxed">
-          I'm a full stack developer with experience across web, mobile apps, and game development. Currently
-          focused on building intelligent applications powered by Large Language Models and exploring new frontiers in AI.
+          I'm a seasoned software engineer with a deep background in e-commerce. As a polyglot developer I thrive on using the right language for each problem while pioneering AI-driven solutions.
         </p>
         <div className="flex flex-wrap gap-6">
           <motion.a

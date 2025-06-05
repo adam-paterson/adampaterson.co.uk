@@ -13,7 +13,7 @@ export interface Props {
 
 const { 
 	title,
-	description = "Technical Solution Engineer with 14 years of e-commerce expertise, transitioning into AI consulting. Specializing in enterprise e-commerce architecture and emerging AI technologies.",
+        description = "Technical Solution Engineer with over 15 years of e-commerce expertise and a polyglot mindset, exploring AI and emerging technologies.",
 	image = "/og-image.jpg",
 	canonicalURL = new URL(Astro.url.pathname, Astro.site).href
 } = Astro.props;
@@ -23,8 +23,9 @@ const {
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
+                <meta name="description" content={description} />
+                <meta name="keywords" content="Adam Paterson, software engineer, e-commerce expert, AI consultant, polyglot developer, digital commerce" />
+                <meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
