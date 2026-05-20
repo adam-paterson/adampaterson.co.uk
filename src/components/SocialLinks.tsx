@@ -15,8 +15,8 @@ const socialLinks: SocialLink[] = [
     icon: FaLinkedin,
   },
   {
-    name: "Twitter",
-    url: "https://twitter.com/adam_paterson",
+    name: "X / Twitter",
+    url: "https://x.com/adampaterson",
     icon: FaTwitter,
   },
   { name: "Medium", url: "https://medium.com/@adam_paterson", icon: FaMedium },
