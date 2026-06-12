@@ -1,43 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import NebulaEffect from '../components/NebulaEffect';
-import OrbitalAccent from '../components/OrbitalAccent';
 import AnimatedSection from '../components/AnimatedSection';
-import Stars from '../components/Stars';
 import SocialLinks from '../components/SocialLinks';
 
 const pageTitle = "Contact Me - Adam Paterson";
-const pageDescription = "Get in touch with Adam Paterson for AI solutions, e-commerce expertise, or collaboration opportunities.";
+const pageDescription = "Contact Adam Paterson for AI systems, e-commerce architecture, technical discovery, or delivery support.";
 
 const contactReasons = [
-  { id: "general", label: "General", icon: "💬" },
-  { id: "ai", label: "AI Solutions", icon: "🤖" },
-  { id: "ecommerce", label: "E-commerce", icon: "🛍️" },
-  { id: "hire", label: "Hire Me", icon: "👨‍💻" }
+  { id: "general", label: "General", code: "GEN" },
+  { id: "ai", label: "AI Systems", code: "AIS" },
+  { id: "ecommerce", label: "Commerce", code: "COM" },
+  { id: "hire", label: "Availability", code: "AVL" }
 ];
 
 const contactLinks = [
-  { title: "Email", value: "hello@adampaterson.co.uk", href: "mailto:hello@adampaterson.co.uk", icon: "✉️" },
-  { title: "Location", value: "Manchester, UK", icon: "📍" },
-  { title: "Availability", value: "Open to opportunities", icon: "🟢" }
+  { title: "Email", value: "hello@adampaterson.co.uk", href: "mailto:hello@adampaterson.co.uk" },
+  { title: "Location", value: "Manchester, UK" },
+  { title: "Availability", value: "Open to focused AI and commerce work" }
 ];
 
 interface Field {
   name: string;
   label: string;
-  type: 'text' | 'email' | 'select';  // Explicitly define allowed types
-  options?: string[];  // Make options optional
+  type: 'text' | 'email' | 'select';
+  options?: string[];
 }
 
 interface FieldGroup {
   [key: string]: Field[];
 }
 
-// Define all possible fields with proper typing
 const allFields: FieldGroup = {
   ai: [
     { name: 'company', label: 'Company', type: 'text' },
-    { name: 'current_stack', label: 'Current Tech Stack', type: 'text' }
+    { name: 'current_stack', label: 'Current Stack or Workflow', type: 'text' }
   ],
   ecommerce: [
     { name: 'company', label: 'Company', type: 'text' },
@@ -58,7 +54,7 @@ const allFields: FieldGroup = {
     { name: 'company', label: 'Company', type: 'text' },
     {
       name: 'position_type',
-      label: 'Position Type',
+      label: 'Engagement Type',
       type: 'select',
       options: ['Full-time', 'Contract', 'Freelance', 'Consulting']
     },
@@ -73,160 +69,146 @@ const allFields: FieldGroup = {
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <main class="relative min-h-screen py-20">
-    <Stars client:load className="fixed inset-0" />
-    <NebulaEffect client:load />
-    
-    <div class="relative z-20">
-      <AnimatedSection client:load className="max-w-6xl mx-auto px-4">
-        <div class="relative mb-16">
-          <OrbitalAccent client:load />
-          <h1 class="text-4xl font-bold text-slate-900 dark:text-neutral-200">Contact Me</h1>
-          <p class="text-slate-600 dark:text-neutral-400 mt-4">Let's explore the possibilities together</p>
-        </div>
-
-        <div class="grid md:grid-cols-[1.5fr,1fr] gap-16">
-          {/* Contact Form */}
+  <main class="min-h-screen">
+    <section class="border-b py-24 hairline sm:py-32">
+      <AnimatedSection client:load className="section-shell">
+        <div class="grid gap-12 lg:grid-cols-[1fr,0.8fr] lg:items-end">
           <div>
-            <form id="contactForm" class="space-y-8">
-              {/* Contact Reason Pills */}
-              <div class="flex flex-wrap gap-2">
+            <p class="section-kicker">Contact</p>
+            <h1 class="max-w-4xl text-5xl font-semibold leading-tight sm:text-6xl">
+              Send the problem, the constraints, and what needs to change.
+            </h1>
+          </div>
+          <p class="section-copy">
+            I work best when the context is specific: what you are building, where the uncertainty is, and what a useful next step would unlock.
+          </p>
+        </div>
+      </AnimatedSection>
+    </section>
+
+    <section class="py-24 sm:py-32">
+      <AnimatedSection client:load className="section-shell">
+        <div class="grid gap-12 lg:grid-cols-[1.2fr,0.8fr]">
+          <form id="contactForm" class="technical-panel-strong space-y-8">
+            <div>
+              <p class="mono-label mb-4">Enquiry Type</p>
+              <div class="grid gap-2 sm:grid-cols-4">
                 {contactReasons.map(reason => (
-                  <label class="reason-pill group cursor-pointer">
+                  <label class="reason-pill cursor-pointer">
                     <input 
                       type="radio" 
                       name="contact_reason" 
                       value={reason.id} 
-                      class="hidden" 
+                      class="sr-only"
                     />
-                    <div class="px-4 py-2 rounded-full border 
-                                flex items-center gap-2 
-                                transition-all duration-300
-                                bg-white/[0.02] border-white/5 
-                                hover:border-white/10">
-                      <span class="text-lg opacity-70 group-hover:opacity-100">{reason.icon}</span>
-                      <span class="text-sm text-slate-700 dark:text-neutral-300">{reason.label}</span>
+                    <div class="reason-pill-surface">
+                      <span class="font-mono text-[0.65rem]">{reason.code}</span>
+                      <span>{reason.label}</span>
                     </div>
                   </label>
                 ))}
               </div>
+            </div>
 
-              {/* Base Fields */}
-              <div class="grid md:grid-cols-2 gap-4">
-                <div class="form-group">
-                  <label for="name" class="text-xs text-slate-600 dark:text-neutral-400 mb-1.5 block">Name</label>
-                  <input type="text" id="name" name="name" required class="form-input" />
-                </div>
-                <div class="form-group">
-                  <label for="email" class="text-xs text-slate-600 dark:text-neutral-400 mb-1.5 block">Email</label>
-                  <input type="email" id="email" name="email" required class="form-input" />
-                </div>
-              </div>
-
-              {/* Dynamic Fields */}
-              {Object.entries(allFields).map(([reasonId, fields]) => (
-                <div id={`fields-${reasonId}`} class="hidden space-y-4">
-                  {fields.map(field => (
-                    <div class="form-group">
-                      <label for={field.name} class="text-xs text-slate-600 dark:text-neutral-400 mb-1.5 block">
-                        {field.label}
-                      </label>
-                      {field.type === 'select' ? (
-                        <select 
-                          id={field.name} 
-                          name={field.name} 
-                          required 
-                          class="form-input"
-                        >
-                          <option value="">Select {field.label}</option>
-                          {field.options?.map(option => (
-                            <option value={option}>{option}</option>
-                          ))}
-                        </select>
-                      ) : (
-                        <input 
-                          type={field.type}
-                          id={field.name}
-                          name={field.name}
-                          required
-                          class="form-input"
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ))}
-
-              {/* Message Field */}
+            <div class="grid gap-4 md:grid-cols-2">
               <div class="form-group">
-                <label for="message" class="text-xs text-slate-600 dark:text-neutral-400 mb-1.5 block">Message</label>
-                <textarea id="message" name="message" rows="6" required class="form-input"></textarea>
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" name="name" required class="form-input" />
               </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" required class="form-input" />
+              </div>
+            </div>
 
-              <button 
-                type="submit"
-                class="relative px-8 py-3 rounded-lg border-2 
-                       transition-colors duration-300
-                       border-teal-600 text-teal-700 hover:bg-teal-50 hover:border-teal-700
-                       dark:border-teal-400 dark:text-teal-400 dark:hover:bg-teal-900/10"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
+            {Object.entries(allFields).map(([reasonId, fields]) => (
+              <div id={`fields-${reasonId}`} class="hidden space-y-4">
+                {fields.map(field => (
+                  <div class="form-group">
+                    <label for={field.name} class="form-label">
+                      {field.label}
+                    </label>
+                    {field.type === 'select' ? (
+                      <select
+                        id={field.name}
+                        name={field.name}
+                        required
+                        class="form-input"
+                      >
+                        <option value="">Select {field.label}</option>
+                        {field.options?.map(option => (
+                          <option value={option}>{option}</option>
+                        ))}
+                      </select>
+                    ) : (
+                      <input
+                        type={field.type}
+                        id={field.name}
+                        name={field.name}
+                        required
+                        class="form-input"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))}
 
-          {/* Contact Info Sidebar */}
-          <div class="space-y-12">
-            {/* Quick Links */}
-            <div class="space-y-4">
-              {contactLinks.map(link => (
-                <div class="flex items-center gap-4 p-4 bg-white/[0.02] rounded-lg border border-white/5">
-                  <span class="text-xl opacity-70">{link.icon}</span>
-                  <div>
-                    <div class="text-xs text-slate-600 dark:text-neutral-400">{link.title}</div>
+            <div class="form-group">
+              <label for="message" class="form-label">Message</label>
+              <textarea id="message" name="message" rows="7" required class="form-input"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">
+              Send Message
+            </button>
+          </form>
+
+          <aside class="space-y-5">
+            <div class="technical-panel">
+              <p class="section-kicker">Direct</p>
+              <div class="space-y-5">
+                {contactLinks.map(link => (
+                  <div class="border-l pl-4 hairline">
+                    <div class="mono-label mb-2">{link.title}</div>
                     {link.href ? (
-                      <a href={link.href} class="text-sm text-slate-700 dark:text-neutral-200 hover:text-white">
+                      <a href={link.href} class="link-underline">
                         {link.value}
                       </a>
                     ) : (
-                      <div class="text-sm text-slate-700 dark:text-neutral-200">{link.value}</div>
+                      <div style="color: var(--color-muted);">{link.value}</div>
                     )}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
-            {/* Social Links */}
-            <div class="p-6 bg-white/[0.02] rounded-lg border border-white/5">
-              <h3 class="text-sm font-medium text-slate-900 dark:text-neutral-200 mb-4">Connect With Me</h3>
+            <div class="technical-panel">
+              <p class="section-kicker">Profiles</p>
               <SocialLinks />
             </div>
-          </div>
+          </aside>
         </div>
       </AnimatedSection>
-    </div>
+    </section>
   </main>
 </Layout>
 
 <script>
   const FUNCTION_URL = 'https://contact-form-606879949848.europe-west2.run.app';
 
-  // Add form field visibility toggling
   document.querySelectorAll('input[name="contact_reason"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
-      // Hide all field groups
       document.querySelectorAll('[id^="fields-"]').forEach(group => {
         group.classList.add('hidden');
       });
 
-      // Show selected field group
       const selectedReason = (e.target as HTMLInputElement).value;
       const fieldsToShow = document.getElementById(`fields-${selectedReason}`);
       if (fieldsToShow) {
         fieldsToShow.classList.remove('hidden');
       }
 
-      // Update selected pill styling
       document.querySelectorAll('.reason-pill').forEach(pill => {
         pill.classList.remove('selected');
       });
@@ -234,7 +216,6 @@ const allFields: FieldGroup = {
     });
   });
 
-  // Form submission handler
   document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -261,11 +242,8 @@ const allFields: FieldGroup = {
         throw new Error('Failed to send message');
       }
       
-      // Clear form
       form.reset();
-      
-      // Show success message
-      alert('Message sent successfully! I will get back to you soon.');
+      alert('Message sent successfully. I will get back to you soon.');
     } catch (error) {
       console.error('Error sending message:', error);
       alert('Failed to send message. Please try again or email me directly at hello@adampaterson.co.uk');
@@ -277,86 +255,64 @@ const allFields: FieldGroup = {
 </script>
 
 <style>
-  /* Light theme text colors */
-  :global(.light) {
-    /* Headings and important text */
-    & h1, & h2, & h3, & .text-neutral-200, & .text-neutral-300 {
-      color: rgb(15 23 42); /* slate-900 */
-    }
-
-    /* Secondary text */
-    & .text-neutral-400, & label {
-      color: rgb(51 65 85); /* slate-700 */
-    }
-
-    /* Form elements */
-    & .form-input {
-      background-color: rgb(248 250 252); /* slate-50 */
-      border-color: rgb(226 232 240); /* slate-200 */
-      color: rgb(15 23 42); /* slate-900 */
-    }
-
-    & .form-input:focus {
-      border-color: rgb(148 163 184); /* slate-400 */
-    }
-
-    /* Reason pills */
-    & .reason-pill div {
-      background-color: rgb(248 250 252); /* slate-50 */
-      border-color: rgb(226 232 240); /* slate-200 */
-    }
-
-    & .reason-pill.selected div {
-      background-color: rgb(241 245 249); /* slate-100 */
-      border-color: rgb(148 163 184); /* slate-400 */
-    }
-
-    /* Contact info cards */
-    & [class*="flex items-center gap-4 p-4"],
-    & .p-6 {
-      background-color: rgb(248 250 252); /* slate-50 */
-      border-color: rgb(226 232 240); /* slate-200 */
-    }
+  .form-label {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
-  /* Dark theme text colors - keep existing styles */
-  :global(.dark) {
-    & .text-neutral-200, & .text-neutral-300 {
-      color: rgb(229 229 229);
-    }
-
-    & .text-neutral-400, & label {
-      color: rgb(156 163 175); /* gray-400 */
-    }
-  }
-
-  /* Base styles */
   .form-input {
     width: 100%;
-    border-width: 1px;
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
-    font-size: 0.875rem;
-    transition-property: color, background-color, border-color;
-    transition-duration: 300ms;
+    border: 1px solid var(--color-line);
+    border-radius: 0.375rem;
+    background: var(--color-panel);
+    color: var(--color-ink);
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
     outline: none;
   }
 
-  /* Select specific styles */
+  .form-input:focus {
+    border-color: var(--color-signal);
+    box-shadow: 0 0 0 3px var(--color-signal-soft);
+  }
+
+  textarea.form-input {
+    resize: vertical;
+  }
+
   select.form-input {
     appearance: none;
-    padding-right: 2.5rem;
     cursor: pointer;
+    padding-right: 2.5rem;
+    background-image: linear-gradient(45deg, transparent 50%, var(--color-muted) 50%),
+      linear-gradient(135deg, var(--color-muted) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 1.25rem, calc(100% - 12px) 1.25rem;
+    background-size: 6px 6px, 6px 6px;
     background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 1.25rem;
   }
 
-  :global(.light) select.form-input {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgb(51, 65, 85)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  .reason-pill-surface {
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--color-line);
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    color: var(--color-muted);
+    background: var(--color-panel);
   }
 
-  :global(.dark) select.form-input {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgb(156, 163, 175)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  .reason-pill.selected .reason-pill-surface,
+  .reason-pill:focus-within .reason-pill-surface {
+    border-color: var(--color-signal);
+    color: var(--color-ink);
+    background: var(--color-signal-soft);
   }
 </style>

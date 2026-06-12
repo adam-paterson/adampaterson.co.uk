@@ -1,5 +1,5 @@
 ---
-import ThemeSwitcher from '../components/ThemeSwitcher';
+import '../../styles/globals.css';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
@@ -39,7 +39,7 @@ const {
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={image} />
 	</head>
-	<body class="dark:bg-gray-900 dark:text-white">
+	<body>
 		<GoogleTagManager />
 		<Navigation />
 		<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

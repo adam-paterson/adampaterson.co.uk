@@ -1,8 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { useState } from 'react';
 
 interface CodeExample {
     title: string;
@@ -49,17 +47,9 @@ export default function AutoGenCode({ examples }: AutoGenCodeProps) {
 
             {/* Code Content */}
             <div className="relative">
-                <SyntaxHighlighter
-                    language="python"
-                    style={oneDark}
-                    customStyle={{
-                        margin: 0,
-                        padding: '1.5rem',
-                        background: 'transparent',
-                    }}
-                >
-                    {examples[activeTab].code}
-                </SyntaxHighlighter>
+                <pre className="m-0 overflow-x-auto p-6 text-sm leading-6">
+                    <code>{examples[activeTab].code}</code>
+                </pre>
 
                 {/* Copy Button */}
                 <button

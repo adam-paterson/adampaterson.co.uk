@@ -2,53 +2,248 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap');
+@font-face {
+  font-family: "Poppins Local";
+  src: url("/font/Poppins-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins Local";
+  src: url("/font/Poppins-SemiBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins Local";
+  src: url("/font/Poppins-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lora Local";
+  src: url("/font/Lora-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
 
 @layer base {
+  :root {
+    --color-bg: #f7f7f2;
+    --color-bg-strong: #ffffff;
+    --color-ink: #171714;
+    --color-muted: #66665f;
+    --color-soft: #8b8b83;
+    --color-line: rgba(23, 23, 20, 0.14);
+    --color-line-strong: rgba(23, 23, 20, 0.28);
+    --color-panel: rgba(255, 255, 255, 0.76);
+    --color-panel-strong: rgba(255, 255, 255, 0.92);
+    --color-signal: #177e63;
+    --color-signal-soft: rgba(23, 126, 99, 0.12);
+    --color-warning: #9a5f00;
+    --shadow-line: 0 20px 80px rgba(23, 23, 20, 0.08);
+    --font-body: "Poppins Local", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-display: "Poppins Local", ui-sans-serif, system-ui, sans-serif;
+    --font-editorial: "Lora Local", Georgia, serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  .dark {
+    --color-bg: #0f0f0d;
+    --color-bg-strong: #080807;
+    --color-ink: #f2f1ea;
+    --color-muted: #b2b0a8;
+    --color-soft: #7d7a72;
+    --color-line: rgba(242, 241, 234, 0.14);
+    --color-line-strong: rgba(242, 241, 234, 0.32);
+    --color-panel: rgba(23, 23, 20, 0.72);
+    --color-panel-strong: rgba(17, 17, 15, 0.92);
+    --color-signal: #6bd6b5;
+    --color-signal-soft: rgba(107, 214, 181, 0.13);
+    --color-warning: #d7a84f;
+    --shadow-line: 0 24px 90px rgba(0, 0, 0, 0.35);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    background: var(--color-bg);
+  }
+
   body {
-    @apply antialiased text-neutral-800 dark:text-neutral-200 font-jakarta;
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+    @apply antialiased;
+    min-width: 320px;
+    overflow-x: hidden;
+    background:
+      radial-gradient(circle at 78% 8%, rgba(23, 126, 99, 0.08), transparent 26rem),
+      linear-gradient(180deg, var(--color-bg-strong), var(--color-bg));
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--color-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, black, transparent 78%);
+    opacity: 0.35;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    mix-blend-mode: multiply;
+    opacity: 0.035;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sora font-medium tracking-tight;
+    font-family: var(--font-display);
+    letter-spacing: 0;
+    color: var(--color-ink);
+  }
+
+  a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
   }
 }
 
 @layer components {
   .link-underline {
-    @apply relative text-teal-600 dark:text-teal-400 
-           after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 
-           after:bg-teal-600 dark:after:bg-teal-400
-           after:transition-all after:duration-300 hover:after:w-full;
+    @apply relative;
+    color: var(--color-signal);
+  }
+
+  .link-underline::after {
+    @apply absolute bottom-0 left-0 h-px w-0 transition-all duration-200;
+    content: "";
+    background: var(--color-signal);
+  }
+
+  .link-underline:hover::after {
+    @apply w-full;
   }
 
   .card {
-    @apply relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800
-           bg-white/30 dark:bg-neutral-800/30 backdrop-blur-sm
-           transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700
-           hover:shadow-lg hover:shadow-neutral-100 dark:hover:shadow-neutral-900/10
-           hover:-translate-y-1;
+    @apply relative overflow-hidden rounded-md border transition-colors duration-200;
+    background: var(--color-panel);
+    border-color: var(--color-line);
+    box-shadow: var(--shadow-line);
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-teal-600 to-teal-400 dark:from-teal-400 dark:to-teal-200 
-           bg-clip-text text-transparent;
+    color: var(--color-ink);
   }
 
   .btn-primary {
-    @apply px-8 py-3 rounded-lg bg-teal-600 dark:bg-teal-500 text-white 
-           hover:bg-teal-700 dark:hover:bg-teal-400 transition-colors duration-300;
+    @apply inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200;
+    background: var(--color-ink);
+    color: var(--color-bg);
+    border: 1px solid var(--color-ink);
   }
 
   .btn-secondary {
-    @apply px-8 py-3 rounded-lg border-2 border-teal-600 dark:border-teal-400
-           text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/10
-           transition-colors duration-300;
+    @apply inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200;
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-strong);
+    background: color-mix(in srgb, var(--color-panel) 76%, transparent);
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: translateY(-1px);
+  }
+
+  .section-shell {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  }
+
+  .section-kicker {
+    @apply mb-4 font-mono text-[0.7rem] font-semibold uppercase;
+    color: var(--color-signal);
+    letter-spacing: 0.16em;
+  }
+
+  .section-title {
+    @apply max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl;
+  }
+
+  .section-copy {
+    @apply max-w-3xl text-base leading-8 sm:text-lg;
+    color: var(--color-muted);
+  }
+
+  .technical-panel {
+    @apply rounded-md border p-6;
+    background: var(--color-panel);
+    border-color: var(--color-line);
+    box-shadow: var(--shadow-line);
+  }
+
+  .technical-panel-strong {
+    @apply rounded-md border p-6;
+    background: var(--color-panel-strong);
+    border-color: var(--color-line-strong);
+    box-shadow: var(--shadow-line);
+  }
+
+  .mono-label {
+    @apply font-mono text-[0.7rem] font-semibold uppercase;
+    color: var(--color-soft);
+    letter-spacing: 0.14em;
+  }
+
+  .system-pill {
+    @apply inline-flex items-center rounded-sm border px-3 py-1 font-mono text-[0.7rem] uppercase;
+    color: var(--color-muted);
+    border-color: var(--color-line);
+    background: var(--color-panel);
+    letter-spacing: 0.1em;
+  }
+
+  .hairline {
+    border-color: var(--color-line);
+  }
+
+  .technical-grid {
+    background-image:
+      linear-gradient(var(--color-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  .editorial-note {
+    font-family: var(--font-editorial);
+    color: var(--color-muted);
   }
 }
 
-/* Custom styles */
 @media (max-width: 640px) {
   .font-handwriting {
     font-size: clamp(2.5rem, 8vw, 4rem);
@@ -60,33 +255,26 @@
   }
 }
 
-/* Add smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
-/* Improve transitions */
 * {
   transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
               border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Particle effects optimization */
 @media (prefers-reduced-motion: reduce) {
-  .particle {
+  *,
+  *::before,
+  *::after {
     animation: none !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-/* Custom selection color */
 ::selection {
-  @apply bg-neutral-900/10 dark:bg-white/10;
+  background: var(--color-signal-soft);
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   @apply w-2;
 }
@@ -96,9 +284,10 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-200 dark:bg-neutral-800 rounded-full;
+  background: var(--color-line-strong);
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-neutral-300 dark:bg-neutral-700;
+  background: var(--color-soft);
 }

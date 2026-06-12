@@ -31,10 +31,11 @@ const SocialLinks: React.FC = () => {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white-600 hover:text-gray-600 dark:text-gray-400 dark:hover:text-white transition-colors duration-300"
+          className="rounded-sm border p-2 transition-colors duration-200"
+          style={{ color: "var(--color-muted)", borderColor: "var(--color-line)" }}
           aria-label={link.name}
         >
-          <link.icon className="w-6 h-6" />
+          <link.icon className="h-4 w-4" />
         </a>
       ))}
     </div>

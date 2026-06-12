@@ -1,5 +1,5 @@
 ---
-import ThemeSwitcher from '../components/ThemeSwitcher';
+import '../../styles/globals.css';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
@@ -54,9 +54,8 @@ const structuredData = {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-		<meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+		<meta name="theme-color" content="#f7f7f2" media="(prefers-color-scheme: light)">
+		<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
 		<script is:inline>
 			if (!('theme' in localStorage)) {
 				document.documentElement.classList.add('dark');
@@ -90,31 +89,20 @@ const structuredData = {
 		{image && <meta name="twitter:image" content={new URL(image, Astro.site).href} />}
 
 		<!-- Person Schema -->
-		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
 		<!-- Additional head content -->
 		<slot name="head" />
 	</head>
-	<body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50">
-		<!-- Background subtle gradient -->
-		<div class="fixed inset-0 bg-gradient-to-br from-blue-50 to-violet-50 dark:from-slate-900 dark:to-slate-800 -z-10"></div>
-		
-		<!-- Navigation - Removed the nav element and using the Navigation component -->
+	<body>
 		<Navigation client:load />
 
-		<!-- Main Content -->
 		<main class="min-h-screen">
-			<div class="container mx-auto px-4 py-8">
-				<!-- Content -->
-				<div class="prose prose-slate dark:prose-invert max-w-none">
-					<slot />
-				</div>
-			</div>
+			<slot />
 		</main>
 
-		<!-- Footer -->
-		<footer class="border-t border-slate-200 dark:border-slate-800 py-8 mt-16">
-			<div class="container mx-auto px-4">
+		<footer class="mt-16 border-t py-8 hairline">
+			<div class="section-shell">
 				<Footer />
 			</div>
 		</footer>
@@ -122,58 +110,34 @@ const structuredData = {
 </html>
 
 <style is:global>
-	:root {
-		--font-fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-		--font-body: "Inter", var(--font-fallback);
-		--font-mono: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-	}
-	
-	html {
-		font-family: var(--font-body);
-		scroll-behavior: smooth;
-	}
-	
 	/* Navigation Links */
 	.nav-link {
-		@apply relative py-2 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors;
+		@apply relative py-2 font-mono text-[0.72rem] uppercase transition-colors;
+		color: var(--color-muted);
+		letter-spacing: 0.12em;
 	}
 
 	.nav-link::after {
-		@apply content-[''] absolute bottom-0 left-0 w-full h-0.5 bg-violet-600 dark:bg-violet-400 scale-x-0 transition-transform duration-300;
+		@apply content-[''] absolute bottom-0 left-0 h-px w-full scale-x-0 transition-transform duration-200;
+		background: var(--color-signal);
 	}
 
 	.nav-link:hover::after {
 		@apply scale-x-100;
 	}
 
+	.nav-link:hover {
+		color: var(--color-ink);
+	}
+
 	/* Code blocks */
 	pre {
-		@apply p-4 rounded-lg bg-slate-900 dark:bg-slate-800 !important;
+		@apply rounded-md border p-4 !important;
+		background: var(--color-panel-strong) !important;
+		border-color: var(--color-line) !important;
 	}
 
 	code {
-		@apply font-mono text-sm;
-	}
-
-	/* Custom selection color */
-	::selection {
-		@apply bg-teal-100 dark:bg-teal-900/30;
-	}
-
-	/* Custom scrollbar */
-	::-webkit-scrollbar {
-		@apply w-2;
-	}
-
-	::-webkit-scrollbar-track {
-		@apply bg-transparent;
-	}
-
-	::-webkit-scrollbar-thumb {
-		@apply bg-teal-200 dark:bg-teal-800 rounded-full;
-	}
-
-	::-webkit-scrollbar-thumb:hover {
-		@apply bg-teal-300 dark:bg-teal-700;
+		font-family: var(--font-mono);
 	}
 </style>

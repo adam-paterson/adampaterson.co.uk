@@ -4,149 +4,164 @@ import Hero from '../components/Hero';
 import CareerTimeline from '../components/CareerTimeline';
 import AnimatedSection from '../components/AnimatedSection';
 import TechStack from '../components/TechStack';
-import NebulaEffect from '../components/NebulaEffect';
-import OrbitalAccent from '../components/OrbitalAccent';
 
-const roles = [
-  "build e-commerce solutions",
-  "am a Technical Solution Engineer",
-  "specialize in digital commerce",
-  "explore AI technologies",
-  "solve complex problems",
-  "architect scalable systems"
+const capabilities = [
+  {
+    code: "01",
+    title: "Agentic Workflow Design",
+    summary: "Practical agent systems that can be inspected, measured, and connected to real operational processes.",
+    details: ["Task decomposition", "Human-in-the-loop review", "Traceable execution"]
+  },
+  {
+    code: "02",
+    title: "Commerce Architecture",
+    summary: "Scalable e-commerce platforms with clear integration boundaries and delivery paths.",
+    details: ["Shopify, Adobe Commerce, BigCommerce", "Headless and composable builds", "Discovery to launch"]
+  },
+  {
+    code: "03",
+    title: "Engineering Enablement",
+    summary: "Technical leadership that turns ambiguous business problems into maintainable systems.",
+    details: ["Solution design", "Code review and mentoring", "Build and deployment hygiene"]
+  }
 ];
 
-const pageTitle = "Adam Paterson - Technical Solution Engineer";
-const pageDescription = "Technical Solution Engineer with 14 years of e-commerce expertise, exploring the intersection of AI and digital commerce.";
+const principles = [
+  "Start with the workflow, not the model",
+  "Make system behavior observable",
+  "Prefer boring infrastructure until the problem proves otherwise",
+  "Explain trade-offs in language teams can act on"
+];
+
+const pageTitle = "Adam Paterson - AI Systems and Commerce Engineer";
+const pageDescription = "AI systems and commerce engineer helping teams design practical agent workflows, resilient platforms, and clear technical strategies.";
 ---
 
 <Layout 
   title={pageTitle}
   description={pageDescription}
 >
-  <main class="flex flex-col min-h-screen">
-    <Hero client:load roles={roles} />
+  <main class="min-h-screen">
+    <Hero client:load />
 
-    {/* Services Section */}
-    <section id="services" class="relative py-32">
-      <NebulaEffect client:load />
-      <AnimatedSection client:load className="max-w-5xl mx-auto px-4">
-        <div class="relative">
-          <OrbitalAccent client:load />
-          <h2 class="text-3xl font-bold mb-16 gradient-text">What I Do</h2>
+    <section id="services" class="border-t border-b py-24 hairline sm:py-32">
+      <AnimatedSection client:load className="section-shell">
+        <div class="mb-12 grid gap-8 lg:grid-cols-[0.7fr,1fr] lg:items-end">
+          <div>
+            <p class="section-kicker">Practice Areas</p>
+            <h2 class="section-title">Practical AI and commerce architecture, without theatre.</h2>
+          </div>
+          <p class="section-copy">
+            I help teams move from loose technical ambition to systems they can explain, operate, and improve. The work sits where product judgement, software architecture, and AI capability meet.
+          </p>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* AI Applications */}
-          <div class="card p-8">
-            <div class="mb-6 text-neutral-600 dark:text-neutral-400">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-              </svg>
-            </div>
-            <h3 class="text-xl mb-3 gradient-text">AI Applications</h3>
-            <p class="text-neutral-600 dark:text-neutral-400">Integrating LLMs with business processes and applications to enhance efficiency and innovation.</p>
-          </div>
-          {/* E-commerce Expertise */}
-          <div class="card p-8">
-            <div class="mb-6 text-neutral-600 dark:text-neutral-400">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-            </div>
-            <h3 class="text-xl mb-3 gradient-text">E-commerce Solutions</h3>
-            <p class="text-neutral-600 dark:text-neutral-400">Expert in architecting and implementing scalable e-commerce solutions across multiple platforms including Shopify, BigCommerce, Adobe Commerce, and Shopware.</p>
-          </div>
 
-          {/* Web Applications */}
-          <div class="card p-8">
-            <div class="mb-6 text-neutral-600 dark:text-neutral-400">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
-            </div>
-            <h3 class="text-xl mb-3 gradient-text">Web Applications</h3>
-            <p class="text-neutral-600 dark:text-neutral-400">Building custom web applications to meet specific business needs, leveraging modern technologies and best practices.</p>
-          </div>
+        <div class="grid gap-5 lg:grid-cols-3">
+          {capabilities.map((capability) => (
+            <article class="technical-panel-strong flex min-h-[24rem] flex-col justify-between">
+              <div>
+                <div class="mb-10 flex items-center justify-between border-b pb-4 hairline">
+                  <span class="mono-label">{capability.code}</span>
+                  <span class="system-pill">Available</span>
+                </div>
+                <h3 class="mb-4 text-2xl font-semibold">{capability.title}</h3>
+                <p class="leading-7" style="color: var(--color-muted);">{capability.summary}</p>
+              </div>
+              <ul class="mt-10 space-y-3">
+                {capability.details.map((detail) => (
+                  <li class="flex items-start gap-3 text-sm" style="color: var(--color-muted);">
+                    <span class="mt-2 h-px w-7 shrink-0" style="background: var(--color-line-strong);"></span>
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </AnimatedSection>
-      
-      {/* Move TechStack outside AnimatedSection and remove width constraints */}
-      <div class="w-full">
-        <TechStack client:load />
-      </div>
     </section>
 
-    {/* About Section */}
-    <section id="about" class="relative py-18">
-      <NebulaEffect client:load />
-      <AnimatedSection client:load className="max-w-3xl mx-auto px-4">
-        <div class="relative">
-          <OrbitalAccent client:load />
-          <h2 class="text-3xl font-bold mb-12 gradient-text">About Me</h2>
-        </div>
-        <p class="text-lg leading-relaxed mb-16 text-neutral-600 dark:text-neutral-400">
-          I am an AI evangelist, e-commerce expert, and technology explorer. I have over 15 years of experience in the digital space, working with some of the biggest brands in the world.
-        </p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
-          <div class="text-center">
-            <div class="text-4xl font-bold gradient-text">15+</div>
-            <div class="text-sm mt-2 text-neutral-600 dark:text-neutral-400">Years Experience</div>
+    <section id="approach" class="py-24 sm:py-32">
+      <AnimatedSection client:load className="section-shell">
+        <div class="grid gap-10 lg:grid-cols-[0.9fr,1.1fr] lg:items-start">
+          <div>
+            <p class="section-kicker">Operating Model</p>
+            <h2 class="section-title">Systems thinking, kept close to delivery.</h2>
           </div>
-          <div class="text-center">
-            <div class="text-4xl font-bold gradient-text">100+</div>
-            <div class="text-sm mt-2 text-neutral-600 dark:text-neutral-400">Projects Delivered</div>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl font-bold gradient-text">6+</div>
-            <div class="text-sm mt-2 text-neutral-600 dark:text-neutral-400">E-commerce Platforms</div>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl font-bold gradient-text">20+</div>
-            <div class="text-sm mt-2 text-neutral-600 dark:text-neutral-400">Industries Served</div>
+          <div class="technical-panel">
+            <div class="grid gap-4 sm:grid-cols-2">
+              {principles.map((principle, index) => (
+                <div class="border-l pl-4 hairline">
+                  <div class="mono-label mb-3">P{String(index + 1).padStart(2, "0")}</div>
+                  <p class="text-lg leading-7">{principle}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </AnimatedSection>
     </section>
 
-    {/* Career Timeline */}
-    <section id="career" class="relative py-32">
-      <NebulaEffect client:load />
-      {/* Remove max-w-5xl constraint from the outer div */}
-      <div class="mx-auto">
-        <div class="relative max-w-5xl mx-auto px-4">
-          <OrbitalAccent client:load />
-          <h2 class="text-3xl font-bold mb-16 gradient-text">Expeditions</h2>
+    <TechStack client:load />
+
+    <section id="about" class="border-y py-24 hairline sm:py-32">
+      <AnimatedSection client:load className="section-shell">
+        <div class="grid gap-12 lg:grid-cols-[1fr,0.8fr] lg:items-center">
+          <div>
+            <p class="section-kicker">Profile</p>
+            <h2 class="section-title">Fifteen years turning ambiguous digital problems into working platforms.</h2>
+            <p class="section-copy mt-6">
+              My background is enterprise commerce, technical discovery, and full-stack delivery. The current focus is applying AI where it improves real workflows: research, operations, engineering support, and customer-facing systems that need strong guardrails.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="technical-panel">
+              <div class="text-4xl font-semibold">15+</div>
+              <div class="mono-label mt-3">Years Experience</div>
+            </div>
+            <div class="technical-panel">
+              <div class="text-4xl font-semibold">100+</div>
+              <div class="mono-label mt-3">Projects Delivered</div>
+            </div>
+            <div class="technical-panel">
+              <div class="text-4xl font-semibold">6+</div>
+              <div class="mono-label mt-3">Commerce Platforms</div>
+            </div>
+            <div class="technical-panel">
+              <div class="text-4xl font-semibold">20+</div>
+              <div class="mono-label mt-3">Industries Served</div>
+            </div>
+          </div>
         </div>
-        <div class="relative">
-          <CareerTimeline client:load />
-        </div>
-      </div>
+      </AnimatedSection>
     </section>
 
-    {/* Call to Action */}
-    <section class="py-32 relative">
-      <NebulaEffect client:load />
-      <div class="max-w-3xl mx-auto px-4 text-center">
-        <div class="relative">
-          <OrbitalAccent client:load />
-          <h2 class="text-3xl font-bold mb-6 gradient-text">Looking to Enhance Your E-commerce Platform?</h2>
+    <section id="career" class="py-24 sm:py-32">
+      <div class="section-shell mb-12">
+        <p class="section-kicker">Career Ledger</p>
+        <h2 class="section-title">Selected delivery record.</h2>
+      </div>
+      <CareerTimeline client:load />
+    </section>
+
+    <section class="border-t py-24 hairline sm:py-32">
+      <div class="section-shell">
+        <div class="technical-panel-strong grid gap-8 lg:grid-cols-[1fr,auto] lg:items-center">
+          <div>
+            <p class="section-kicker">Contact</p>
+            <h2 class="section-title">Need a clearer path through an AI or commerce system?</h2>
+            <p class="section-copy mt-5">
+              Send the problem, the constraints, and what is at stake. I will help turn it into a practical technical route.
+            </p>
+          </div>
+          <a href="mailto:hello@adampaterson.co.uk" class="btn-primary">Get in Touch</a>
         </div>
-        <p class="text-lg mb-12 text-neutral-600 dark:text-neutral-400">Let's discuss how we can optimize your digital commerce experience with modern technologies.</p>
-        <a 
-          href="mailto:hello@adampaterson.co.uk"
-          class="relative px-8 py-3 rounded-lg border-2 border-teal-600 dark:border-teal-400
-                 text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/10
-                 transition-colors duration-300"
-        >
-          Get in Touch
-        </a>
       </div>
     </section>
   </main>
 </Layout>
 
 <script>
-  // Add smooth scroll behavior
   document.querySelectorAll('a[href^="#"]').forEach((element) => {
     const anchor = element as HTMLAnchorElement;
     anchor.addEventListener('click', function(e) {
@@ -159,32 +174,3 @@ const pageDescription = "Technical Solution Engineer with 14 years of e-commerce
     });
   });
 </script>
-
-<style>
-  .animated-role {
-    @apply inline-block min-w-[200px];
-  }
-  .cursor {
-    @apply animate-pulse;
-  }
-
-  .career-timeline-container {
-    position: relative;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
-  }
-
-  .career-timeline-container::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .career-timeline-container::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .career-timeline-container::-webkit-scrollbar-thumb {
-    background-color: rgba(155, 155, 155, 0.7);
-    border-radius: 3px;
-    border: transparent;
-  }
-</style>

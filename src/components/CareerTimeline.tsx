@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Stars from './Stars';
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 interface TimelineEntry {
@@ -129,35 +128,35 @@ const CareerTimeline: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-[600px] overflow-hidden" ref={containerRef}>
-      <Stars className="absolute inset-0" />
-      
-      {/* Navigation Controls */}
-      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between items-center px-4 z-20">
+    <div className="relative overflow-hidden" ref={containerRef}>
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-[var(--color-line)]" />
+
+      <div className="absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 items-center justify-between px-5 sm:px-8">
         <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ y: -1 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => navigate(-1)}
-          className="p-2 rounded-full bg-teal-500/10 backdrop-blur-sm border border-teal-500/20 
-                     text-teal-600 dark:text-teal-400"
+          className="rounded-md border p-2 backdrop-blur"
+          style={{ borderColor: "var(--color-line-strong)", background: "var(--color-panel-strong)", color: "var(--color-ink)" }}
           disabled={isAnimating}
+          aria-label="Previous role"
         >
           <FiChevronLeft className="w-6 h-6" />
         </motion.button>
         <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ y: -1 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => navigate(1)}
-          className="p-2 rounded-full bg-teal-500/10 backdrop-blur-sm border border-teal-500/20 
-                     text-teal-600 dark:text-teal-400"
+          className="rounded-md border p-2 backdrop-blur"
+          style={{ borderColor: "var(--color-line-strong)", background: "var(--color-panel-strong)", color: "var(--color-ink)" }}
           disabled={isAnimating}
+          aria-label="Next role"
         >
           <FiChevronRight className="w-6 h-6" />
         </motion.button>
       </div>
 
-      {/* Timeline Cards */}
-      <div className="relative pt-16 pb-8">
+      <div className="section-shell relative py-8">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -177,29 +176,40 @@ const CareerTimeline: React.FC = () => {
               duration: 0.5,
               ease: "easeInOut"
             }}
-            className="max-w-2xl mx-auto"
+            className="mx-auto max-w-3xl"
           >
-            <div className="card p-6 backdrop-blur-sm">
-              <div className="flex items-center gap-4 mb-4">
+            <div className="technical-panel-strong">
+              <div className="mb-6 flex items-center justify-between border-b pb-5 hairline">
+                <span className="mono-label">Entry {String(currentIndex + 1).padStart(2, "0")}</span>
+                <span className="mono-label">{timeline[currentIndex].date}</span>
+              </div>
+
+              <div className="mb-6 flex items-center gap-4">
                 <img 
                   src={timeline[currentIndex].companyLogo} 
                   alt={timeline[currentIndex].company}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="h-12 w-12 rounded-sm border object-cover"
+                  style={{ borderColor: "var(--color-line)" }}
                 />
                 <div>
-                  <h3 className="text-xl font-bold">{timeline[currentIndex].title}</h3>
-                  <p className="text-neutral-600 dark:text-neutral-400">
-                    {timeline[currentIndex].company} • {timeline[currentIndex].date}
+                  <h3 className="text-xl font-semibold">{timeline[currentIndex].title}</h3>
+                  <p className="text-sm" style={{ color: "var(--color-muted)" }}>
+                    {timeline[currentIndex].company}
                   </p>
                 </div>
               </div>
-              <p className="text-neutral-700 dark:text-neutral-300 mb-4">
+
+              <p className="mb-6 leading-7" style={{ color: "var(--color-muted)" }}>
                 {timeline[currentIndex].description}
               </p>
+
               {timeline[currentIndex].achievements && (
-                <ul className="list-disc list-inside space-y-2 text-neutral-600 dark:text-neutral-400">
+                <ul className="grid gap-3 sm:grid-cols-2">
                   {timeline[currentIndex].achievements.map((achievement, i) => (
-                    <li key={i}>{achievement}</li>
+                    <li key={i} className="flex gap-3 text-sm leading-6" style={{ color: "var(--color-muted)" }}>
+                      <span className="mt-2 h-px w-6 shrink-0 bg-[var(--color-line-strong)]" />
+                      <span>{achievement}</span>
+                    </li>
                   ))}
                 </ul>
               )}
@@ -207,18 +217,17 @@ const CareerTimeline: React.FC = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Progress Indicators */}
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="mt-8 flex justify-center gap-2">
           {timeline.map((_, index) => (
-            <motion.div
+            <motion.button
               key={index}
-              className={`w-2 h-2 rounded-full cursor-pointer ${
-                index === currentIndex 
-                  ? 'bg-teal-600 dark:bg-teal-400' 
-                  : 'bg-teal-200 dark:bg-teal-800'
-              }`}
-              whileHover={{ scale: 1.2 }}
+              className="h-2 w-8 rounded-sm"
+              style={{
+                background: index === currentIndex ? "var(--color-signal)" : "var(--color-line-strong)",
+              }}
+              whileHover={{ y: -1 }}
               onClick={() => setCurrentIndex(index)}
+              aria-label={`View role ${index + 1}`}
             />
           ))}
         </div>

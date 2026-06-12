@@ -30,7 +30,7 @@ export default function AgentFlowDiagram({ agents, messages }: AgentFlowDiagramP
     React.useEffect(() => {
         let timeouts: NodeJS.Timeout[] = [];
         
-        messages.forEach((message, index) => {
+        messages.forEach((message) => {
             const timeout = setTimeout(() => {
                 setActiveMessages(prev => [...prev, message]);
             }, message.delay);

@@ -8,14 +8,6 @@ let error = null;
 
 try {
   posts = await getCollection('blog');
-  console.log('Collection result:', posts); // Full debug output
-  console.log('Found articles:', posts.length);
-  console.log('Article details:', posts.map(post => ({
-    slug: post.slug,
-    title: post.data.title,
-    date: post.data.date,
-    body: post.body.slice(0, 100)
-  })));
 } catch (e) {
   error = e;
   console.error('Full error:', e);
@@ -29,59 +21,71 @@ if (posts.length > 0) {
 ---
 
 <Layout title="Blog | Adam Paterson">
-	<main class="container mx-auto px-4 py-8">
-		<h1 class="text-4xl font-bold mb-8">Blog</h1>
+	<main class="min-h-screen">
+		<section class="border-b py-24 hairline sm:py-32">
+			<div class="section-shell">
+				<p class="section-kicker">Writing</p>
+				<h1 class="max-w-4xl text-5xl font-semibold leading-tight sm:text-6xl">Notes on AI systems, commerce architecture, and engineering practice.</h1>
+			</div>
+		</section>
+
+		<section class="py-24 sm:py-32">
+			<div class="section-shell">
 		{error && (
-			<p class="text-red-600 dark:text-red-400">
+			<p class="technical-panel" style="color: var(--color-warning);">
 				Error loading articles: {error instanceof Error ? error.message : 'Unknown error'}
 			</p>
 		)}
 		{posts.length === 0 ? (
-			<div class="space-y-4">
-				<p class="text-gray-600 dark:text-gray-300">No articles found.</p>
-				<pre class="text-sm bg-gray-100 dark:bg-gray-800 p-4 rounded">
+			<div class="technical-panel space-y-4">
+				<p style="color: var(--color-muted);">No articles found.</p>
+				<pre class="text-sm">
 					{JSON.stringify({ posts, error }, null, 2)}
 				</pre>
 			</div>
 		) : (
-			<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+			<div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
 				{posts.map((post) => (
-					<article class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+					<article class="technical-panel-strong overflow-hidden p-0">
 						{post.data.image && (
 							<img 
 								src={post.data.image} 
 								alt={post.data.title}
-								class="w-full h-48 object-cover"
+								class="h-48 w-full border-b object-cover hairline"
 							/>
 						)}
 						<div class="p-6">
-							<h2 class="text-2xl font-bold mb-2">
-								<a href={`/blog/${post.slug}`} class="hover:text-blue-500">
+							<div class="mono-label mb-4">
+								<time datetime={new Date(post.data.date).toISOString()}>
+									{new Date(post.data.date).toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'short',
+										day: 'numeric'
+									})}
+								</time>
+							</div>
+							<h2 class="mb-4 text-2xl font-semibold leading-tight">
+								<a href={`/blog/${post.slug}`} class="link-underline">
 									{post.data.title}
 								</a>
 							</h2>
-							<time class="text-gray-500 text-sm mb-3 block">
-								{new Date(post.data.date).toLocaleDateString('en-US', {
-									year: 'numeric',
-									month: 'long',
-									day: 'numeric'
-								})}
-							</time>
 							{post.data.excerpt && (
-								<p class="text-gray-600 dark:text-gray-300 mb-4">
+								<p class="mb-6 leading-7" style="color: var(--color-muted);">
 									{post.data.excerpt}
 								</p>
 							)}
 							<a 
 								href={`/blog/${post.slug}`}
-								class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+								class="btn-secondary"
 							>
-								Read More
+								Read Article
 							</a>
 						</div>
 					</article>
 				))}
 			</div>
 		)}
+			</div>
+		</section>
 	</main>
 </Layout>
