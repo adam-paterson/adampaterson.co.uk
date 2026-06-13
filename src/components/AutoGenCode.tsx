@@ -54,7 +54,7 @@ export default function AutoGenCode({ examples }: AutoGenCodeProps) {
                 {/* Copy Button */}
                 <button
                     onClick={() => copyToClipboard(examples[activeTab].code)}
-                    className="absolute top-4 right-4 px-3 py-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-gray-100 dark:bg-gray-800 rounded"
+                    className="absolute top-4 right-4 px-3 py-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-gray-100 dark:bg-gray-800 rounded-sm"
                 >
                     {copied ? 'Copied!' : 'Copy'}
                 </button>

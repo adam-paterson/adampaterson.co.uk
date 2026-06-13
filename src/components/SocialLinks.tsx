@@ -31,7 +31,7 @@ const SocialLinks: React.FC = () => {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-sm border p-2 transition-colors duration-200"
+          className="rounded-xs border p-2 transition-colors duration-200"
           style={{ color: "var(--color-muted)", borderColor: "var(--color-line)" }}
           aria-label={link.name}
         >

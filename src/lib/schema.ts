@@ -27,5 +27,5 @@ export const generateBlogPostSchema = (post: any) => ({
   dateModified: post.updateDate,
   keywords: post.tags,
   image: post.image,
-  url: `https://www.adampaterson.co.uk/blog/${post.slug}`,
+  url: `https://www.adampaterson.co.uk/blog/${post.id}`,
 });

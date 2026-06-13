@@ -6,14 +6,14 @@ import 'reactflow/dist/style.css';
 const AgentNode = memo(({ data }: { data: { label: string; icon: string; color: string } }) => {
     return (
         <div className={`w-40 h-40 flex items-center justify-center rounded-xl border-2 ${data.color} shadow-lg transition-transform hover:scale-105`}>
-            <Handle type="target" position={Position.Top} className="!bg-current" />
+            <Handle type="target" position={Position.Top} className="bg-current!" />
             <div className="flex flex-col items-center gap-3 p-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-white/90 to-white/50 dark:from-black/90 dark:to-black/50 p-3 ring-2 ring-current shadow-lg">
+                <div className="w-16 h-16 rounded-full bg-linear-to-br from-white/90 to-white/50 dark:from-black/90 dark:to-black/50 p-3 ring-2 ring-current shadow-lg">
                     <div className="w-full h-full" dangerouslySetInnerHTML={{ __html: data.icon }} />
                 </div>
                 <span className="text-sm font-medium text-center">{data.label}</span>
             </div>
-            <Handle type="source" position={Position.Bottom} className="!bg-current" />
+            <Handle type="source" position={Position.Bottom} className="bg-current!" />
         </div>
     );
 });
@@ -95,7 +95,7 @@ const WorkflowDiagram: React.FC = () => {
                 fitView
                 attributionPosition="bottom-left"
                 proOptions={{ hideAttribution: true }}
-                className="[&_.react-flow__controls]:bg-white [&_.react-flow__controls]:dark:bg-gray-900 [&_.react-flow__controls]:border-2 [&_.react-flow__controls]:border-gray-200 [&_.react-flow__controls]:dark:border-gray-800 [&_.react-flow__controls-button]:border-gray-200 [&_.react-flow__controls-button]:dark:border-gray-800 [&_.react-flow__controls-button]:hover:bg-gray-50 [&_.react-flow__controls-button]:dark:hover:bg-gray-800"
+                className="[&_.react-flow__controls]:bg-white dark:[&_.react-flow__controls]:bg-gray-900 [&_.react-flow__controls]:border-2 [&_.react-flow__controls]:border-gray-200 dark:[&_.react-flow__controls]:border-gray-800 [&_.react-flow__controls-button]:border-gray-200 dark:[&_.react-flow__controls-button]:border-gray-800 hover:[&_.react-flow__controls-button]:bg-gray-50 dark:hover:[&_.react-flow__controls-button]:bg-gray-800"
             >
                 <Background className="dark:bg-gray-950" color="#94a3b8" gap={16} />
                 <Controls />

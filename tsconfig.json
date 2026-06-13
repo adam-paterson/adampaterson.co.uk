@@ -4,5 +4,5 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   },
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "node_modules", "functions/contact-form"]
 }
