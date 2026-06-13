@@ -103,7 +103,7 @@ export default function AgentFlowDiagram({ agents, messages }: AgentFlowDiagramP
                             <p className="text-gray-700 dark:text-gray-200">{selectedAgent.description}</p>
                             <button
                                 onClick={() => setSelectedAgent(null)}
-                                className="mt-4 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600"
+                                className="mt-4 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-sm hover:bg-gray-200 dark:hover:bg-gray-600"
                             >
                                 Close
                             </button>

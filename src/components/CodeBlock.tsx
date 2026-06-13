@@ -28,9 +28,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language = 'typescript', fi
           {filename}
         </div>
       )}
-      <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute inset-0 bg-linear-to-r from-teal-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
       <div className="relative rounded-lg overflow-hidden">
-        <pre className="!bg-white dark:!bg-neutral-900 !p-4">
+        <pre className="bg-white! dark:bg-neutral-900! p-4!">
           <code className={`language-${language}`}>
             {code}
           </code>

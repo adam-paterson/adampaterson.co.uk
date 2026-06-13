@@ -23,7 +23,7 @@ const Hero: React.FC<HeroProps> = () => {
   return (
     <section className="relative isolate overflow-hidden border-b hairline">
       <div className="absolute inset-0 -z-10 technical-grid opacity-40" />
-      <div className="absolute left-1/2 top-0 -z-10 h-72 w-px bg-[var(--color-line-strong)]" />
+      <div className="absolute left-1/2 top-0 -z-10 h-72 w-px bg-(--color-line-strong)" />
 
       <motion.div
         initial={{ y: 16, opacity: 0 }}
@@ -67,16 +67,16 @@ const Hero: React.FC<HeroProps> = () => {
         >
           <div className="mb-6 flex items-center justify-between border-b pb-4 hairline">
             <span className="mono-label">Operating Model</span>
-            <span className="h-2 w-2 rounded-full bg-[var(--color-signal)]" />
+            <span className="h-2 w-2 rounded-full bg-(--color-signal)" />
           </div>
 
           <div className="space-y-4">
             {systemSteps.map((step, index) => (
-              <div key={step.label} className="relative grid grid-cols-[3rem,1fr] gap-4">
+              <div key={step.label} className="relative grid grid-cols-[3rem_1fr] gap-4">
                 {index < systemSteps.length - 1 && (
-                  <span className="absolute left-6 top-10 h-10 w-px bg-[var(--color-line)]" />
+                  <span className="absolute left-6 top-10 h-10 w-px bg-(--color-line)" />
                 )}
-                <span className="flex h-12 w-12 items-center justify-center rounded-sm border font-mono text-xs" style={{ borderColor: "var(--color-line-strong)", color: "var(--color-signal)" }}>
+                <span className="flex h-12 w-12 items-center justify-center rounded-xs border font-mono text-xs" style={{ borderColor: "var(--color-line-strong)", color: "var(--color-signal)" }}>
                   {step.label}
                 </span>
                 <div>

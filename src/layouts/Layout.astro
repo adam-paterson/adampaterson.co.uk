@@ -108,36 +108,3 @@ const structuredData = {
 		</footer>
 	</body>
 </html>
-
-<style is:global>
-	/* Navigation Links */
-	.nav-link {
-		@apply relative py-2 font-mono text-[0.72rem] uppercase transition-colors;
-		color: var(--color-muted);
-		letter-spacing: 0.12em;
-	}
-
-	.nav-link::after {
-		@apply content-[''] absolute bottom-0 left-0 h-px w-full scale-x-0 transition-transform duration-200;
-		background: var(--color-signal);
-	}
-
-	.nav-link:hover::after {
-		@apply scale-x-100;
-	}
-
-	.nav-link:hover {
-		color: var(--color-ink);
-	}
-
-	/* Code blocks */
-	pre {
-		@apply rounded-md border p-4 !important;
-		background: var(--color-panel-strong) !important;
-		border-color: var(--color-line) !important;
-	}
-
-	code {
-		font-family: var(--font-mono);
-	}
-</style>

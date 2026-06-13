@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { FaAws, FaMagento, FaMicrosoft } from "react-icons/fa";
 import { 
-  SiReact, SiVuedotjs, SiPhp, SiPython, SiAmazon, 
+  SiReact, SiVuedotjs, SiPhp, SiPython, 
   SiGooglecloud, SiDocker, SiKubernetes, SiShopify,
-  SiMagento, SiLaravel, SiSymfony, SiJavascript,
+  SiLaravel, SiSymfony, SiJavascript,
   SiTypescript, SiTailwindcss, SiNextdotjs, SiNodedotjs,
   SiMysql, SiPostgresql, SiMongodb, SiRedis,
   SiPytorch, SiTensorflow, SiOpenai,
-  SiMicrosoft,
   SiBigcommerce,
   SiRuby,
   SiZend,
@@ -34,7 +34,7 @@ const stackGroups: StackGroup[] = [
       { name: "PyTorch", icon: SiPytorch },
       { name: "TensorFlow", icon: SiTensorflow },
       { name: "OpenAI", icon: SiOpenai },
-      { name: "AutoGen", icon: SiMicrosoft },
+      { name: "AutoGen", icon: FaMicrosoft },
     ]
   },
   {
@@ -69,7 +69,7 @@ const stackGroups: StackGroup[] = [
     name: "Infrastructure",
     summary: "Cloud deployments, containerisation, and repeatable platform foundations.",
     items: [
-      { name: "AWS", icon: SiAmazon },
+      { name: "AWS", icon: FaAws },
       { name: "Google Cloud", icon: SiGooglecloud },
       { name: "Docker", icon: SiDocker },
       { name: "Kubernetes", icon: SiKubernetes },
@@ -81,7 +81,7 @@ const stackGroups: StackGroup[] = [
     summary: "Discovery, implementation, and optimisation across established platforms.",
     items: [
       { name: "Shopify", icon: SiShopify },
-      { name: "Adobe Commerce", icon: SiMagento },
+      { name: "Adobe Commerce", icon: FaMagento },
       { name: "BigCommerce", icon: SiBigcommerce },
     ]
   }
@@ -93,7 +93,7 @@ const TechStack: React.FC = () => {
   return (
     <section className="border-t py-24 hairline sm:py-32">
       <div className="section-shell">
-        <div className="mb-12 grid gap-8 lg:grid-cols-[0.65fr,1fr] lg:items-end">
+        <div className="mb-12 grid gap-8 lg:grid-cols-[0.65fr_1fr] lg:items-end">
           <div>
             <p className="section-kicker">Technology</p>
             <h2 className="section-title">A stack chosen for maintainability, not novelty.</h2>
@@ -110,7 +110,7 @@ const TechStack: React.FC = () => {
               onMouseEnter={() => setActiveGroup(group.name)}
               onFocus={() => setActiveGroup(group.name)}
               tabIndex={0}
-              className="technical-panel flex min-h-[22rem] flex-col"
+              className="technical-panel flex min-h-88 flex-col"
               animate={{ opacity: activeGroup === group.name ? 1 : 0.74 }}
               transition={{ duration: 0.2 }}
             >
@@ -125,7 +125,7 @@ const TechStack: React.FC = () => {
                 {group.items.map((tech) => (
                   <div
                     key={tech.name}
-                    className="group flex min-h-12 items-center gap-3 rounded-sm border p-3"
+                    className="group flex min-h-12 items-center gap-3 rounded-xs border p-3"
                     style={{
                       borderColor: "var(--color-line)",
                       background: activeGroup === group.name ? "var(--color-signal-soft)" : "transparent",

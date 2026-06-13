@@ -99,7 +99,7 @@ const Stars: React.FC<ParticlesProps> = ({ className, parallax = false }) => {
       return (
         <motion.div
           key={`shooting-star-${i}`}
-          className="absolute h-[1px] bg-neutral-600 dark:bg-white"
+          className="absolute h-px bg-neutral-600 dark:bg-white"
           style={{
             width: '3px',
             left: `${startX}%`,
@@ -151,7 +151,7 @@ const Stars: React.FC<ParticlesProps> = ({ className, parallax = false }) => {
 
   return (
     <div ref={ref} className={`${className} absolute inset-0 overflow-hidden`}>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/50 dark:to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-white/50 dark:to-transparent pointer-events-none" />
       {parallax ? (
         <motion.div style={{ y }} className="absolute inset-0">
           {stars}

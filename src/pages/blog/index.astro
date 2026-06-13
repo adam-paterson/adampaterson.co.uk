@@ -65,7 +65,7 @@ if (posts.length > 0) {
 								</time>
 							</div>
 							<h2 class="mb-4 text-2xl font-semibold leading-tight">
-								<a href={`/blog/${post.slug}`} class="link-underline">
+								<a href={`/blog/${post.id}`} class="link-underline">
 									{post.data.title}
 								</a>
 							</h2>
@@ -75,7 +75,7 @@ if (posts.length > 0) {
 								</p>
 							)}
 							<a 
-								href={`/blog/${post.slug}`}
+								href={`/blog/${post.id}`}
 								class="btn-secondary"
 							>
 								Read Article

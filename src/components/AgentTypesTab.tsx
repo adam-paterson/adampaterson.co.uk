@@ -55,7 +55,7 @@ const AgentTypesTab: React.FC = () => {
   }, [activeTab]);
 
   return (
-    <div className="my-8 rounded-2xl overflow-hidden bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm border border-neutral-200/50 dark:border-neutral-800/50">
+    <div className="my-8 rounded-2xl overflow-hidden bg-white/50 dark:bg-neutral-900/50 backdrop-blur-xs border border-neutral-200/50 dark:border-neutral-800/50">
       {/* Tab Navigation */}
       <div className="flex space-x-4 p-4 border-b border-neutral-200/50 dark:border-neutral-800/50">
         {agentTabs.map((tab, index) => (
@@ -92,9 +92,9 @@ const AgentTypesTab: React.FC = () => {
           {agentTabs[activeTab].description}
         </p>
         <div className="relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg" />
+          <div className="absolute inset-0 bg-linear-to-r from-teal-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg" />
           <div className="relative rounded-lg overflow-hidden">
-            <pre className="!bg-white dark:!bg-neutral-900 !p-4">
+            <pre className="bg-white! dark:bg-neutral-900! p-4!">
               <code className="language-python">
                 {agentTabs[activeTab].code}
               </code>

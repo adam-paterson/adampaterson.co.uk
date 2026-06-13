@@ -34,7 +34,7 @@ const ThemeSwitcher: React.FC = () => {
       <FiSun className="mr-2" style={{ color: "var(--color-soft)" }} size={16} />
       <button
         onClick={toggleTheme}
-        className="relative inline-flex h-6 w-11 items-center rounded-sm border transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+        className="relative inline-flex h-6 w-11 items-center rounded-xs border transition-colors focus:outline-hidden focus:ring-2 focus:ring-offset-2"
         style={{
           background: "var(--color-panel)",
           borderColor: "var(--color-line-strong)",
@@ -46,7 +46,7 @@ const ThemeSwitcher: React.FC = () => {
         <span
           className={`${
             isDark ? "translate-x-6" : "translate-x-1"
-          } inline-block h-4 w-4 transform rounded-[2px] transition-transform shadow-sm`}
+          } inline-block h-4 w-4 transform rounded-[2px] transition-transform shadow-xs`}
           style={{ background: "var(--color-ink)" }}
         />
       </button>

@@ -1,6 +1,164 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@source "../src";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-jakarta: Plus Jakarta Sans, sans-serif;
+  --font-sora: Sora, sans-serif;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility link-underline {
+  @apply relative;
+  color: var(--color-signal);
+
+  &::after {
+    @apply absolute bottom-0 left-0 h-px w-0 transition-all duration-200;
+    content: '';
+    background: var(--color-signal);
+  }
+
+  &:hover::after {
+    @apply w-full;
+  }
+}
+
+@utility card {
+  @apply relative overflow-hidden rounded-md border transition-colors duration-200;
+  background: var(--color-panel);
+  border-color: var(--color-line);
+  box-shadow: var(--shadow-line);
+}
+
+@utility gradient-text {
+  color: var(--color-ink);
+}
+
+@utility btn-primary {
+  @apply inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200;
+  background: var(--color-ink);
+  color: var(--color-bg);
+  border: 1px solid var(--color-ink);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@utility btn-secondary {
+  @apply inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200;
+  color: var(--color-ink);
+  border: 1px solid var(--color-line-strong);
+  background: color-mix(in srgb, var(--color-panel) 76%, transparent);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@utility section-shell {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+}
+
+@utility section-kicker {
+  @apply mb-4 font-mono text-[0.7rem] font-semibold uppercase;
+  color: var(--color-signal);
+  letter-spacing: 0.16em;
+}
+
+@utility section-title {
+  @apply max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl;
+}
+
+@utility section-copy {
+  @apply max-w-3xl text-base leading-8 sm:text-lg;
+  color: var(--color-muted);
+}
+
+@utility technical-panel {
+  @apply rounded-md border p-6;
+  background: var(--color-panel);
+  border-color: var(--color-line);
+  box-shadow: var(--shadow-line);
+}
+
+@utility technical-panel-strong {
+  @apply rounded-md border p-6;
+  background: var(--color-panel-strong);
+  border-color: var(--color-line-strong);
+  box-shadow: var(--shadow-line);
+}
+
+@utility mono-label {
+  @apply font-mono text-[0.7rem] font-semibold uppercase;
+  color: var(--color-soft);
+  letter-spacing: 0.14em;
+}
+
+@utility system-pill {
+  @apply inline-flex items-center rounded-xs border px-3 py-1 font-mono text-[0.7rem] uppercase;
+  color: var(--color-muted);
+  border-color: var(--color-line);
+  background: var(--color-panel);
+  letter-spacing: 0.1em;
+}
+
+@utility hairline {
+  border-color: var(--color-line);
+}
+
+@utility technical-grid {
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+@utility editorial-note {
+  font-family: var(--font-editorial);
+  color: var(--color-muted);
+}
+
+@utility nav-link {
+  @apply relative py-2 font-mono text-[0.72rem] uppercase transition-colors;
+  color: var(--color-muted);
+  letter-spacing: 0.12em;
+
+  &::after {
+    @apply absolute bottom-0 left-0 h-px w-full scale-x-0 transition-transform duration-200;
+    content: "";
+    background: var(--color-signal);
+  }
+
+  &:hover {
+    color: var(--color-ink);
+  }
+
+  &:hover::after {
+    @apply scale-x-100;
+  }
+}
 
 @font-face {
   font-family: "Poppins Local";
@@ -132,115 +290,15 @@
   select {
     font: inherit;
   }
-}
 
-@layer components {
-  .link-underline {
-    @apply relative;
-    color: var(--color-signal);
+  pre {
+    @apply rounded-md border p-4;
+    background: var(--color-panel-strong) !important;
+    border-color: var(--color-line) !important;
   }
 
-  .link-underline::after {
-    @apply absolute bottom-0 left-0 h-px w-0 transition-all duration-200;
-    content: "";
-    background: var(--color-signal);
-  }
-
-  .link-underline:hover::after {
-    @apply w-full;
-  }
-
-  .card {
-    @apply relative overflow-hidden rounded-md border transition-colors duration-200;
-    background: var(--color-panel);
-    border-color: var(--color-line);
-    box-shadow: var(--shadow-line);
-  }
-
-  .gradient-text {
-    color: var(--color-ink);
-  }
-
-  .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200;
-    background: var(--color-ink);
-    color: var(--color-bg);
-    border: 1px solid var(--color-ink);
-  }
-
-  .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200;
-    color: var(--color-ink);
-    border: 1px solid var(--color-line-strong);
-    background: color-mix(in srgb, var(--color-panel) 76%, transparent);
-  }
-
-  .btn-primary:hover,
-  .btn-secondary:hover {
-    transform: translateY(-1px);
-  }
-
-  .section-shell {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
-  }
-
-  .section-kicker {
-    @apply mb-4 font-mono text-[0.7rem] font-semibold uppercase;
-    color: var(--color-signal);
-    letter-spacing: 0.16em;
-  }
-
-  .section-title {
-    @apply max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl;
-  }
-
-  .section-copy {
-    @apply max-w-3xl text-base leading-8 sm:text-lg;
-    color: var(--color-muted);
-  }
-
-  .technical-panel {
-    @apply rounded-md border p-6;
-    background: var(--color-panel);
-    border-color: var(--color-line);
-    box-shadow: var(--shadow-line);
-  }
-
-  .technical-panel-strong {
-    @apply rounded-md border p-6;
-    background: var(--color-panel-strong);
-    border-color: var(--color-line-strong);
-    box-shadow: var(--shadow-line);
-  }
-
-  .mono-label {
-    @apply font-mono text-[0.7rem] font-semibold uppercase;
-    color: var(--color-soft);
-    letter-spacing: 0.14em;
-  }
-
-  .system-pill {
-    @apply inline-flex items-center rounded-sm border px-3 py-1 font-mono text-[0.7rem] uppercase;
-    color: var(--color-muted);
-    border-color: var(--color-line);
-    background: var(--color-panel);
-    letter-spacing: 0.1em;
-  }
-
-  .hairline {
-    border-color: var(--color-line);
-  }
-
-  .technical-grid {
-    background-image:
-      linear-gradient(var(--color-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
-    background-size: 36px 36px;
-  }
-
-  .editorial-note {
-    font-family: var(--font-editorial);
-    color: var(--color-muted);
+  code {
+    font-family: var(--font-mono);
   }
 }
 

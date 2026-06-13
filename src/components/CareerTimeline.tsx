@@ -129,14 +129,14 @@ const CareerTimeline: React.FC = () => {
 
   return (
     <div className="relative overflow-hidden" ref={containerRef}>
-      <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-[var(--color-line)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-(--color-line)" />
 
       <div className="absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 items-center justify-between px-5 sm:px-8">
         <motion.button
           whileHover={{ y: -1 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => navigate(-1)}
-          className="rounded-md border p-2 backdrop-blur"
+          className="rounded-md border p-2 backdrop-blur-sm"
           style={{ borderColor: "var(--color-line-strong)", background: "var(--color-panel-strong)", color: "var(--color-ink)" }}
           disabled={isAnimating}
           aria-label="Previous role"
@@ -147,7 +147,7 @@ const CareerTimeline: React.FC = () => {
           whileHover={{ y: -1 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => navigate(1)}
-          className="rounded-md border p-2 backdrop-blur"
+          className="rounded-md border p-2 backdrop-blur-sm"
           style={{ borderColor: "var(--color-line-strong)", background: "var(--color-panel-strong)", color: "var(--color-ink)" }}
           disabled={isAnimating}
           aria-label="Next role"
@@ -188,7 +188,7 @@ const CareerTimeline: React.FC = () => {
                 <img 
                   src={timeline[currentIndex].companyLogo} 
                   alt={timeline[currentIndex].company}
-                  className="h-12 w-12 rounded-sm border object-cover"
+                  className="h-12 w-12 rounded-xs border object-cover"
                   style={{ borderColor: "var(--color-line)" }}
                 />
                 <div>
@@ -207,7 +207,7 @@ const CareerTimeline: React.FC = () => {
                 <ul className="grid gap-3 sm:grid-cols-2">
                   {timeline[currentIndex].achievements.map((achievement, i) => (
                     <li key={i} className="flex gap-3 text-sm leading-6" style={{ color: "var(--color-muted)" }}>
-                      <span className="mt-2 h-px w-6 shrink-0 bg-[var(--color-line-strong)]" />
+                      <span className="mt-2 h-px w-6 shrink-0 bg-(--color-line-strong)" />
                       <span>{achievement}</span>
                     </li>
                   ))}
@@ -221,7 +221,7 @@ const CareerTimeline: React.FC = () => {
           {timeline.map((_, index) => (
             <motion.button
               key={index}
-              className="h-2 w-8 rounded-sm"
+              className="h-2 w-8 rounded-xs"
               style={{
                 background: index === currentIndex ? "var(--color-signal)" : "var(--color-line-strong)",
               }}

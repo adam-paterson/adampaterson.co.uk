@@ -18,7 +18,7 @@ const Navigation: React.FC = () => {
       <div className="section-shell">
         <div className="flex items-center justify-between h-16">
           <div className="relative group">
-            <a href="/" className="flex h-9 w-9 items-center justify-center rounded-sm border font-mono text-sm font-semibold" style={{ borderColor: "var(--color-line-strong)", color: "var(--color-ink)" }} aria-label="Adam Paterson home">
+            <a href="/" className="flex h-9 w-9 items-center justify-center rounded-xs border font-mono text-sm font-semibold" style={{ borderColor: "var(--color-line-strong)", color: "var(--color-ink)" }} aria-label="Adam Paterson home">
               AP
             </a>
             <span className="absolute left-12 top-1/2 hidden -translate-y-1/2 whitespace-nowrap font-mono text-[0.6rem] uppercase sm:block" style={{ color: "var(--color-soft)", letterSpacing: "0.12em" }}>
